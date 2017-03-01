@@ -6,7 +6,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
-
+/**
+ * 
+ * @author samuel, alice
+ *
+ */
 public class PlateauFousFous implements Partie1 {
 	
 	private final int BLANC = 1;
@@ -93,6 +97,11 @@ public class PlateauFousFous implements Partie1 {
 
 	}
 	
+	/**
+	 * 
+	 * @param cell The cell in String fromat like "C3" to convert
+	 * @return A Cell instance containing height and width
+	 */
 	private Cell parseCell(String cell){
 		int height = 0;
 		int width = (int) cell.charAt(1);
@@ -118,6 +127,12 @@ public class PlateauFousFous implements Partie1 {
 		return new Cell(height, width);
 	}
 	
+	/**
+	 * 
+	 * @param cell The current Cell
+	 * @param player The current player
+	 * @return True if the cell's pion must take another pion
+	 */
 	private boolean doitPrendre(Cell cell, String player){
 		int i = cell.getHeight() + 1;
 		int j = cell.getWidth() + 1;
@@ -170,6 +185,12 @@ public class PlateauFousFous implements Partie1 {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param fst The first Cell
+	 * @param snd The second Cell
+	 * @return True if the trajectory is correct
+	 */
 	private boolean trajectoireOK(Cell fst, Cell snd){
 		
 		int i1 = fst.getHeight();
@@ -231,6 +252,11 @@ public class PlateauFousFous implements Partie1 {
 		return nbBlanc == 0 || nbNoir == 0;
 	}
 
+	/**
+	 * 
+	 * @author samuel, alice
+	 *
+	 */
 	private class Cell {
 		
 		private int height;
@@ -248,6 +274,10 @@ public class PlateauFousFous implements Partie1 {
 		public int getWidth(){
 			return this.width;
 		}
+	}
+	
+	public static void main(String[] args){
+		//TODO Faire les tests (save/load un plateau, verfier les methodes servantes à estValide() )
 	}
 	
 }
