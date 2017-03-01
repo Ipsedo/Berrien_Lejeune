@@ -169,6 +169,17 @@ public class PlateauFousFous implements Partie1 {
 		
 		return false;
 	}
+	
+	private boolean trajectoireOK(Cell fst, Cell snd){
+		
+		int i1 = fst.getHeight();
+		int j1 = fst.getWidth();
+		int i2 = snd.getHeight();
+		int j2 = snd.getWidth();
+		
+		
+		return false;
+	}
 
 	public boolean estValide(String move, String player) {
 		// TODO Auto-generated method stub
@@ -176,6 +187,10 @@ public class PlateauFousFous implements Partie1 {
 		Cell cSnd = this.parseCell(move.split("-")[1]);
 		
 		if(this.plateau[cFst.getHeight()][cFst.getWidth()] != (player == this.JBLANC ? this.BLANC : this.NOIR)){
+			return false;
+		}
+		
+		if(this.doitPrendre(cFst, player) && this.plateau[cSnd.getHeight()][cSnd.getWidth()] != (player == this.JBLANC ? NOIR : BLANC)){
 			return false;
 		}
 		
