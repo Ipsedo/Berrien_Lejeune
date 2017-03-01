@@ -262,20 +262,37 @@ public class PlateauFousFous implements Partie1 {
 		private int height;
 		private int width;
 		
+		/**
+		 * 
+		 * @param height The cell height
+		 * @param width The cell width
+		 */
 		public Cell(int height, int width){
 			this.height = height;
 			this.width = width;
 		}
 		
+		/**
+		 * 
+		 * @return The cell height
+		 */
 		public int getHeight(){
 			return this.height;
 		}
 		
+		/**
+		 * 
+		 * @return The cell width
+		 */
 		public int getWidth(){
 			return this.width;
 		}
 	}
 	
+	/**
+	 * 
+	 * @param args Arguments
+	 */
 	public static void main(String[] args){
 		//TODO Faire les tests (save/load un plateau, verfier les methodes servantes à estValide() )
 	}
