@@ -117,6 +117,59 @@ public class PlateauFousFous implements Partie1 {
 		
 		return new Cell(height, width);
 	}
+	
+	private boolean doitPrendre(Cell cell, String joueur){
+		int i = cell.getHeight() + 1;
+		int j = cell.getWidth() + 1;
+		
+		while(i < LIMIT && j < LIMIT){
+			if(this.plateau[i][j] == (joueur == this.JBLANC ? NOIR : BLANC)){
+				return true;
+			} else if(this.plateau[i][j] == (joueur == this.JBLANC ? BLANC : NOIR)){
+				break;
+			}
+			i++;
+			j++;
+		}
+		
+		i = cell.getHeight() + 1;
+		j = cell.getWidth() + 1;
+		while(i >= 0 && j < LIMIT){
+			if(this.plateau[i][j] == (joueur == this.JBLANC ? NOIR : BLANC)){
+				return true;
+			} else if(this.plateau[i][j] == (joueur == this.JBLANC ? BLANC : NOIR)){
+				break;
+			}
+			i--;
+			j++;
+		}
+		
+		i = cell.getHeight() + 1;
+		j = cell.getWidth() + 1;
+		while(i < LIMIT && j >= 0){
+			if(this.plateau[i][j] == (joueur == this.JBLANC ? NOIR : BLANC)){
+				return true;
+			} else if(this.plateau[i][j] == (joueur == this.JBLANC ? BLANC : NOIR)){
+				break;
+			}
+			i++;
+			j--;
+		}
+		
+		i = cell.getHeight() + 1;
+		j = cell.getWidth() + 1;
+		while(i >= 0 && j >= 0){
+			if(this.plateau[i][j] == (joueur == this.JBLANC ? NOIR : BLANC)){
+				return true;
+			} else if(this.plateau[i][j] == (joueur == this.JBLANC ? BLANC : NOIR)){
+				break;
+			}
+			i--;
+			j--;
+		}
+		
+		return false;
+	}
 
 	public boolean estValide(String move, String player) {
 		// TODO Auto-generated method stub
