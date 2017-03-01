@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Map;
 
 
 public class PlateauFousFous implements Partie1 {
@@ -91,9 +92,41 @@ public class PlateauFousFous implements Partie1 {
 		}
 
 	}
+	
+	private Cell parseCell(String cell){
+		int height = 0;
+		int width = (int) cell.charAt(1);
+		
+		if(cell.charAt(0) == 'A'){
+			height = 0;
+		} else if(cell.charAt(0) == 'B'){
+			height = 1;
+		} else if(cell.charAt(0) == 'C'){
+			height = 2;
+		} else if(cell.charAt(0) == 'D'){
+			height = 3;
+		} else if(cell.charAt(0) == 'E'){
+			height = 4;
+		} else if(cell.charAt(0) == 'F'){
+			height = 5;
+		} else if(cell.charAt(0) == 'G'){
+			height = 6;
+		} else if(cell.charAt(0) == 'H'){
+			height = 7;
+		}
+		
+		return new Cell(height, width);
+	}
 
 	public boolean estValide(String move, String player) {
 		// TODO Auto-generated method stub
+		Cell cFst = this.parseCell(move.split("-")[0]);
+		Cell cSnd = this.parseCell(move.split("-")[1]);
+		
+		if(this.plateau[cFst.getHeight()][cFst.getWidth()] != (player == this.JBLANC ? this.BLANC : this.NOIR)){
+			return false;
+		}
+		
 		return false;
 	}
 
@@ -122,4 +155,23 @@ public class PlateauFousFous implements Partie1 {
 		return nbBlanc == 0 || nbNoir == 0;
 	}
 
+	private class Cell {
+		
+		private int height;
+		private int width;
+		
+		public Cell(int height, int width){
+			this.height = height;
+			this.width = width;
+		}
+		
+		public int getHeight(){
+			return this.height;
+		}
+		
+		public int getWidth(){
+			return this.width;
+		}
+	}
+	
 }
