@@ -177,6 +177,11 @@ public class PlateauFousFous implements Partie1 {
 		int i2 = snd.getHeight();
 		int j2 = snd.getWidth();
 		
+		if(Math.abs(i1 - i2) != Math.abs(j1 - j2)){
+			return false;
+		}
+		
+		//Verifier qu'il n'y a pas de pion sur la trajectoire -> à ajouter
 		
 		return false;
 	}
@@ -194,7 +199,11 @@ public class PlateauFousFous implements Partie1 {
 			return false;
 		}
 		
-		return false;
+		if(!this.trajectoireOK(cFst, cSnd)){
+			return false;
+		}
+		
+		return true;
 	}
 
 	public String[] mouvementsPossibles(String player) {
