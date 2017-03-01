@@ -285,6 +285,10 @@ public class PlateauFousFous implements Partie1 {
 			return false;
 		}
 		
+		if(!this.doitPrendre(cFst, player) && this.plateau[cSnd.getHeight()][cSnd.getWidth()] != VIDE){
+			return false;
+		}
+		
 		return true;
 	}
 
