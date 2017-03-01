@@ -134,18 +134,22 @@ public class PlateauFousFous implements Partie1 {
 	 * @return True if the cell's pion must take another pion
 	 */
 	private boolean doitPrendre(Cell cell, String player){
+		// On regarde la diagonale en haut à droite
 		int i = cell.getHeight() + 1;
 		int j = cell.getWidth() + 1;
 		while(i < LIMIT && j < LIMIT){
+			// Si pion adversaire, on peut prendre
 			if(this.plateau[i][j] == (player == this.JBLANC ? NOIR : BLANC)){
 				return true;
 			} else if(this.plateau[i][j] == (player == this.JBLANC ? BLANC : NOIR)){
 				break;
 			}
+			// sinon on regarde plus loin dans la diagonale
 			i++;
 			j++;
 		}
 		
+		// Diagonale bas/droite
 		i = cell.getHeight() - 1;
 		j = cell.getWidth() + 1;
 		while(i >= 0 && j < LIMIT){
@@ -158,6 +162,7 @@ public class PlateauFousFous implements Partie1 {
 			j++;
 		}
 		
+		// Diagonale haut/gauche
 		i = cell.getHeight() + 1;
 		j = cell.getWidth() - 1;
 		while(i < LIMIT && j >= 0){
@@ -170,6 +175,7 @@ public class PlateauFousFous implements Partie1 {
 			j--;
 		}
 		
+		// Diagonale bas/gauche
 		i = cell.getHeight() - 1;
 		j = cell.getWidth() - 1;
 		while(i >= 0 && j >= 0){
@@ -202,7 +208,59 @@ public class PlateauFousFous implements Partie1 {
 			return false;
 		}
 		
-		//Verifier qu'il n'y a pas de pion sur la trajectoire -> à ajouter
+		// Tests si aucun pion sur la trajectoire du move
+		
+		// test si trajectoire va en direction haut/droite
+		if(i1 > i2 && j1 < j2){
+			while(i1-1 < i2 && j1+1 < j2){
+				if(this.plateau[i1-1][j1+1] != VIDE){
+					return false;
+				} else {
+					i1--;
+					j1++;
+				}
+			}
+			return true;
+		}
+		
+		// test trajectoire direction bas/droite
+		if(i1 < i2 && j1 < j2){
+			while(i1+1 < i2 && j1+1 < j2){
+				if(this.plateau[i1+1][j1+1] != VIDE){
+					return false;
+				} else {
+					i1++;
+					j1++;
+				}
+			}
+			return true;
+		}
+		
+		// test trajectoire direction haut/gauche
+		if(i1 > i2 && j1 > j2){
+			while(i1-1 > i2 && j1-1 > j2){
+				if(this.plateau[i1-1][j1-1] != VIDE){
+					return false;
+				} else {
+					i1--;
+					j1--;
+				}
+			}
+			return true;
+		}
+		
+		// test trajectoire direction bas/gauche
+		if(i1 < i2 && j1 > j2){
+			while(i1+1 < i2 && j1-1 < j2){
+				if(this.plateau[i1+1][j1-1] != VIDE){
+					return false;
+				} else {
+					i1++;
+					j1--;
+				}
+			}
+			return true;
+		}
 		
 		return false;
 	}
