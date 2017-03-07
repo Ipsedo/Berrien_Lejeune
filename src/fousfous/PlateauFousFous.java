@@ -1,13 +1,16 @@
 package fousfous;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
+
 import utils.Partie1;
+import fousfous.Cell;
 
 /**
  * 
@@ -73,6 +76,13 @@ public class PlateauFousFous implements Partie1 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		/**
+		for(int i=0; i<8; i++){
+			for(int j=0; j<8;j++){
+				System.out.println(this.plateau[i][j]);
+			}
+		}**/
 
 	}
 
@@ -102,29 +112,29 @@ public class PlateauFousFous implements Partie1 {
 	
 	/**
 	 * 
-	 * @param cell The cell in String fromat like "C3" to convert
+	 * @param cell The cell in String format like "C3" to convert
 	 * @return A Cell instance containing height and width
 	 */
-	private Cell parseCell(String cell){
-		int height = 0;
-		int width = (int) cell.charAt(1);
+	public Cell parseCell(String cell){
+		int width = 0;
+		int height = (int) cell.charAt(1) - '0' - 1;
 		
 		if(cell.charAt(0) == 'A'){
-			height = 0;
+			width = 0;
 		} else if(cell.charAt(0) == 'B'){
-			height = 1;
+			width = 1;
 		} else if(cell.charAt(0) == 'C'){
-			height = 2;
+			width = 2;
 		} else if(cell.charAt(0) == 'D'){
-			height = 3;
+			width = 3;
 		} else if(cell.charAt(0) == 'E'){
-			height = 4;
+			width = 4;
 		} else if(cell.charAt(0) == 'F'){
-			height = 5;
+			width = 5;
 		} else if(cell.charAt(0) == 'G'){
-			height = 6;
+			width = 6;
 		} else if(cell.charAt(0) == 'H'){
-			height = 7;
+			width = 7;
 		}
 		
 		return new Cell(height, width);
@@ -316,43 +326,7 @@ public class PlateauFousFous implements Partie1 {
 		}
 		return nbBlanc == 0 || nbNoir == 0;
 	}
-
-	/**
-	 * 
-	 * @author samuel, alice
-	 *
-	 */
-	private class Cell {
-		
-		private int height;
-		private int width;
-		
-		/**
-		 * 
-		 * @param height The cell height
-		 * @param width The cell width
-		 */
-		public Cell(int height, int width){
-			this.height = height;
-			this.width = width;
-		}
-		
-		/**
-		 * 
-		 * @return The cell height
-		 */
-		public int getHeight(){
-			return this.height;
-		}
-		
-		/**
-		 * 
-		 * @return The cell width
-		 */
-		public int getWidth(){
-			return this.width;
-		}
-	}
+	
 	
 	/**
 	 * 
@@ -360,6 +334,11 @@ public class PlateauFousFous implements Partie1 {
 	 */
 	public static void main(String[] args){
 		//TODO Faire les tests (save/load un plateau, verfier les methodes servantes à estValide() )
+	PlateauFousFous p = new PlateauFousFous();
+	p.setFromFile("plateau.txt");
+	
+	
+	
 	}
 	
 }
