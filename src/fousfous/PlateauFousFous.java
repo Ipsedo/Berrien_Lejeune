@@ -277,6 +277,20 @@ public class PlateauFousFous implements Partie1 {
 		
 		return false;
 	}
+	
+	/**
+	 * 
+	 * @param cell The current cell
+	 * @param snd The current player
+	 * @return True if player's pawn must threaten an another pawn
+	 */
+	public boolean menaceOk(Cell cell, String player) {
+		if(!this.doitPrendre(cell, player)){
+			//TODO 
+		}
+		
+		return false;
+	}
 
 	public boolean estValide(String move, String player) {
 		// TODO Auto-generated method stub
