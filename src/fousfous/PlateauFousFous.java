@@ -146,7 +146,7 @@ public class PlateauFousFous implements Partie1 {
 	 * @param player The current player
 	 * @return True if the cell's pion must take another pion
 	 */
-	private boolean doitPrendre(Cell cell, String player){
+	public boolean doitPrendre(Cell cell, String player){
 		// On regarde la diagonale en haut à droite
 		int i = cell.getHeight() + 1;
 		int j = cell.getWidth() + 1;
@@ -210,7 +210,7 @@ public class PlateauFousFous implements Partie1 {
 	 * @param snd The second Cell
 	 * @return True if the trajectory is correct
 	 */
-	private boolean trajectoireOK(Cell fst, Cell snd){
+	public boolean trajectoireOK(Cell fst, Cell snd){
 		
 		int i1 = fst.getHeight();
 		int j1 = fst.getWidth();
