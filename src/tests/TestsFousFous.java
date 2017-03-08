@@ -96,6 +96,26 @@ public class TestsFousFous {
 		// Joueur blanc en F3 veut se déplacer en H5 (case vide), renvoie faux
 		String move4 = "F3-H5";
 		assertFalse(p1.estValide(move4, player1));
+		
+		// Manque test menace
+	}
+	
+	@Test
+	public void testFinDePartie() {
+		// Il ne reste qu'un pion blanc
+		PlateauFousFous p1 = new PlateauFousFous();
+		p1.setFromFile("plateauTest4");
+		assertTrue(p1.finDePartie());
+		
+		// Il ne reste que des pions noirs
+		PlateauFousFous p2 = new PlateauFousFous();
+		p2.setFromFile("plateauTest5");
+		assertTrue(p2.finDePartie());
+		
+		// Pas fin de partie, renvoie false
+		PlateauFousFous p3 = new PlateauFousFous();
+		p3.setFromFile("plateauTest1");
+		assertFalse(p3.finDePartie());
 	}
 
 }
