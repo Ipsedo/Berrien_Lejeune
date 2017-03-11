@@ -35,4 +35,16 @@ public class Cell {
 	public int getWidth(){
 		return this.width;
 	}
+	
+	public String toString(){
+		char i = (char) (this.height + 'A');
+		char j = (char) (this.width + '1');
+		
+		return String.valueOf(i) + String.valueOf(j);
+	}
+	
+	public static void main(String[] args){
+		Cell test = new Cell(1, 2);
+		System.out.println(test);
+	}
 }

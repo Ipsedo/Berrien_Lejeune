@@ -1,16 +1,13 @@
 package fousfous;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
-
+import java.util.ArrayList;
 
 import utils.Partie1;
-import fousfous.Cell;
 
 /**
  * 
@@ -312,11 +309,19 @@ public class PlateauFousFous implements Partie1 {
 		
 		return false;
 	}
+	
+	public boolean outOfBounds(Cell cell){
+		return !(cell.getHeight() >= 0 && cell.getHeight() < LIMIT && cell.getWidth() >= 0 && cell.getWidth() < LIMIT); 
+	}
 
 	public boolean estValide(String move, String player) {
 		// TODO Auto-generated method stub
 		Cell cFst = this.parseCell(move.split("-")[0]);
 		Cell cSnd = this.parseCell(move.split("-")[1]);
+		
+		if(this.outOfBounds(cFst) || this.outOfBounds(cSnd)){
+			return false;
+		}
 		
 		if(this.plateau[cFst.getHeight()][cFst.getWidth()] != (player == this.JBLANC ? this.BLANC : this.NOIR)){
 			return false;
@@ -339,7 +344,49 @@ public class PlateauFousFous implements Partie1 {
 
 	public String[] mouvementsPossibles(String player) {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<String> tmpRes = new ArrayList<String>();
+		
+		for(int i = 0; i < LIMIT ; i++){
+			for(int j = 0; j < LIMIT; j++){
+				if(this.plateau[i][j] == (player == JBLANC ? BLANC : NOIR)){
+					Cell fstCell = new Cell(i, j);
+					
+					//diagonale en bas à droite
+					for(int k = i + 1, l = j + 1; k < LIMIT && l < LIMIT; k++, l++){
+						Cell sndCell = new Cell(k, l);
+						if(this.estValide(fstCell.toString() + "-" + sndCell.toString(), player)){
+							tmpRes.add(fstCell.toString() + "-" + sndCell.toString());
+						}
+					}
+					
+					//diagonale en bas à gauche
+					for(int k = i + 1, l = j - 1; k < LIMIT && l >= 0; k++, l--){
+						Cell sndCell = new Cell(k, l);
+						if(this.estValide(fstCell.toString() + "-" + sndCell.toString(), player)){
+							tmpRes.add(fstCell.toString() + "-" + sndCell.toString());
+						}
+					}
+					
+					//diagonale en haut à droite
+					for(int k = i - 1, l = j + 1; k >= 0 && l < LIMIT; k--, l++){
+						Cell sndCell = new Cell(k, l);
+						if(this.estValide(fstCell.toString() + "-" + sndCell.toString(), player)){
+							tmpRes.add(fstCell.toString() + "-" + sndCell.toString());
+						}
+					}
+					
+					//diagonale en haut à gauche
+					for(int k = i - 1, l = j - 1; k >= 0 && l >= 0; k--, l--){
+						Cell sndCell = new Cell(k, l);
+						if(this.estValide(fstCell.toString() + "-" + sndCell.toString(), player)){
+							tmpRes.add(fstCell.toString() + "-" + sndCell.toString());
+						}
+					}
+				}
+			}
+		}
+		
+		return (String[]) tmpRes.toArray();
 	}
 
 	public void play(String move, String player) {
