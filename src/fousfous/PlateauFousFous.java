@@ -116,27 +116,8 @@ public class PlateauFousFous implements Partie1 {
 	 * @return A Cell instance containing height and width
 	 */
 	public Cell parseCell(String cell){
-		int width = 0;
-		int height = (int) cell.charAt(1) - '0' - 1;
-		
-		if(cell.charAt(0) == 'A'){
-			width = 0;
-		} else if(cell.charAt(0) == 'B'){
-			width = 1;
-		} else if(cell.charAt(0) == 'C'){
-			width = 2;
-		} else if(cell.charAt(0) == 'D'){
-			width = 3;
-		} else if(cell.charAt(0) == 'E'){
-			width = 4;
-		} else if(cell.charAt(0) == 'F'){
-			width = 5;
-		} else if(cell.charAt(0) == 'G'){
-			width = 6;
-		} else if(cell.charAt(0) == 'H'){
-			width = 7;
-		}
-		
+		int width = cell.charAt(0) - 'A';
+		int height = (int) cell.charAt(1) - '1';		
 		return new Cell(height, width);
 	}
 	
