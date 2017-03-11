@@ -265,9 +265,49 @@ public class PlateauFousFous implements Partie1 {
 	 * @param snd The current player
 	 * @return True if player's pawn must threaten an another pawn
 	 */
-	public boolean menaceOk(Cell cell, String player) {
-		if(!this.doitPrendre(cell, player)){
-			//TODO 
+	public boolean menaceOk(Cell sndCell, String player) {
+		if(this.plateau[sndCell.getHeight()][sndCell.getWidth()] != VIDE){
+			return false;
+		}
+		
+		//diagonale en bas à droite
+		for(int i = sndCell.getHeight() + 1, j = sndCell.getWidth() + 1; i < LIMIT && j < LIMIT; i++, j++){
+			if(this.plateau[i][j] == (player == JBLANC ? BLANC : NOIR)){
+				break;
+			}
+			if(this.plateau[i][j] == (player == JBLANC ? NOIR : BLANC)){
+				return true;
+			}
+		}
+		
+		//diagonale en bas à gauche
+		for(int i = sndCell.getHeight() + 1, j = sndCell.getWidth() - 1; i < LIMIT && j >= 0; i++, j--){
+			if(this.plateau[i][j] == (player == JBLANC ? BLANC : NOIR)){
+				break;
+			}
+			if(this.plateau[i][j] == (player == JBLANC ? NOIR : BLANC)){
+				return true;
+			}
+		}
+		
+		//diagonale en haut à droite
+		for(int i = sndCell.getHeight() - 1, j = sndCell.getWidth() + 1; i >= 0 && j < LIMIT; i--, j++){
+			if(this.plateau[i][j] == (player == JBLANC ? BLANC : NOIR)){
+				break;
+			}
+			if(this.plateau[i][j] == (player == JBLANC ? NOIR : BLANC)){
+				return true;
+			}
+		}
+		
+		//diagonale en haut à gauche
+		for(int i = sndCell.getHeight() - 1, j = sndCell.getWidth() - 1; i >= 0 && j >= 0; i--, j--){
+			if(this.plateau[i][j] == (player == JBLANC ? BLANC : NOIR)){
+				break;
+			}
+			if(this.plateau[i][j] == (player == JBLANC ? NOIR : BLANC)){
+				return true;
+			}
 		}
 		
 		return false;
@@ -290,7 +330,7 @@ public class PlateauFousFous implements Partie1 {
 			return false;
 		}
 		
-		if(!this.doitPrendre(cFst, player) && this.plateau[cSnd.getHeight()][cSnd.getWidth()] != VIDE){
+		if(!this.doitPrendre(cFst, player) && !this.menaceOk(cSnd, player)){
 			return false;
 		}
 		
