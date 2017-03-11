@@ -130,9 +130,9 @@ public class PlateauFousFous implements Partie1 {
 		int j = cell.getWidth() + 1;
 		while(i < LIMIT && j < LIMIT){
 			// Si pion adversaire, on peut prendre
-			if(this.plateau[i][j] == (player == this.JBLANC ? NOIR : BLANC)){
+			if(this.plateau[i][j] == (player == JBLANC ? NOIR : BLANC)){
 				return true;
-			} else if(this.plateau[i][j] == (player == this.JBLANC ? BLANC : NOIR)){
+			} else if(this.plateau[i][j] == (player == JBLANC ? BLANC : NOIR)){
 				break;
 			}
 			// sinon on regarde plus loin dans la diagonale
@@ -323,11 +323,11 @@ public class PlateauFousFous implements Partie1 {
 			return false;
 		}
 		
-		if(this.plateau[cFst.getHeight()][cFst.getWidth()] != (player == this.JBLANC ? this.BLANC : this.NOIR)){
+		if(this.plateau[cFst.getHeight()][cFst.getWidth()] != (player == JBLANC ? BLANC : NOIR)){
 			return false;
 		}
 		
-		if(this.doitPrendre(cFst, player) && this.plateau[cSnd.getHeight()][cSnd.getWidth()] != (player == this.JBLANC ? NOIR : BLANC)){
+		if(this.doitPrendre(cFst, player) && this.plateau[cSnd.getHeight()][cSnd.getWidth()] != (player == JBLANC ? NOIR : BLANC)){
 			return false;
 		}
 		
@@ -424,11 +424,8 @@ public class PlateauFousFous implements Partie1 {
 	 */
 	public static void main(String[] args){
 		//TODO Faire les tests (save/load un plateau, verfier les methodes servantes à estValide() )
-	PlateauFousFous p = new PlateauFousFous();
-	p.setFromFile("plateau.txt");
-	
-	
-	
+		PlateauFousFous p = new PlateauFousFous();
+		p.setFromFile("plateau.txt");
 	}
 	
 }
