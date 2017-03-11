@@ -30,24 +30,21 @@ public class TestsFousFous {
 		p1.setFromFile("plateauTest1");
 		String curr = "F3";
 		Cell currCell = p1.parseCell(curr);
-		String player1 = "Blanc";
-		assertTrue(p1.doitPrendre(currCell, player1));
+		assertTrue(p1.doitPrendre(currCell, PlateauFousFous.JBLANC));
 
 		// Joueur blanc ne peut pas prendre
 		PlateauFousFous p2 = new PlateauFousFous();
 		p2.setFromFile("plateauTest2");
 		String curr2 = "F3";
 		Cell currCell2 = p2.parseCell(curr2);
-		String player2 = "Blanc";
-		assertFalse(p2.doitPrendre(currCell2, player2));
+		assertFalse(p2.doitPrendre(currCell2, PlateauFousFous.JBLANC));
 
 		// Joueur noir prend le blanc en diago
 		PlateauFousFous p3 = new PlateauFousFous();
 		p3.setFromFile("plateauTest1");
 		String curr3 = "D5";
 		Cell currCell3 = p3.parseCell(curr3);
-		String player3 = "Noir";
-		assertTrue(p3.doitPrendre(currCell3, player3));
+		assertTrue(p3.doitPrendre(currCell3, PlateauFousFous.JNOIR));
 	}
 	
 	@Test
@@ -72,32 +69,68 @@ public class TestsFousFous {
 	}
 	
 	@Test
+	public void testMenaceOk(){
+		PlateauFousFous p1 = new PlateauFousFous();
+		p1.setFromFile("plateauTest6");
+		
+		String c1Str = "E4";
+		assertTrue(p1.menaceOk(p1.parseCell(c1Str), PlateauFousFous.JBLANC));
+		assertFalse(p1.menaceOk(p1.parseCell(c1Str), PlateauFousFous.JNOIR));
+		
+		String c2Str = "H1";
+		assertTrue(p1.menaceOk(p1.parseCell(c2Str), PlateauFousFous.JBLANC));
+		assertFalse(p1.menaceOk(p1.parseCell(c2Str), PlateauFousFous.JNOIR));
+		
+		String c3Str = "D1";
+		assertTrue(p1.menaceOk(p1.parseCell(c3Str), PlateauFousFous.JBLANC));
+		assertFalse(p1.menaceOk(p1.parseCell(c3Str), PlateauFousFous.JNOIR));
+		
+		String c4Str = "H5";
+		assertTrue(p1.menaceOk(p1.parseCell(c4Str), PlateauFousFous.JBLANC));
+		assertFalse(p1.menaceOk(p1.parseCell(c4Str), PlateauFousFous.JNOIR));
+		
+		String c5Str = "F1";
+		assertFalse(p1.menaceOk(p1.parseCell(c5Str), PlateauFousFous.JBLANC));
+		assertFalse(p1.menaceOk(p1.parseCell(c5Str), PlateauFousFous.JNOIR));
+	}
+	
+	@Test
 	public void testEstValide() {
 		// Joueur blanc en F3 veut prendre pion noir en D5, renvoie vrai
 		PlateauFousFous p1 = new PlateauFousFous();
 		p1.setFromFile("plateauTest1");
 		String move1 = "F3-D5";
-		String player1 = "Blanc";
-		assertTrue(p1.estValide(move1, player1));
+		assertTrue(p1.estValide(move1, PlateauFousFous.JBLANC));
 		
 		// Joueur blanc en F3 veut prendre pion noir en D3, renvoie faux
 		PlateauFousFous p2 = new PlateauFousFous();
 		p2.setFromFile("plateauTest2");
 		String move2 = "F3-D3";
-		assertFalse(p2.estValide(move2, player1));
+		assertFalse(p2.estValide(move2, PlateauFousFous.JBLANC));
 		
 		// Joueur noir en D3 veut prendre pion noir en B5, renvoie faux
 		PlateauFousFous p3 = new PlateauFousFous();
 		p3.setFromFile("plateauTest3");
 		String move3 = "D3-B5";
-		String player3 = "Noir";
-		assertFalse(p3.estValide(move3, player3));
+		assertFalse(p3.estValide(move3, PlateauFousFous.JNOIR));
 		
 		// Joueur blanc en F3 veut se déplacer en H5 (case vide), renvoie faux
 		String move4 = "F3-H5";
-		assertFalse(p1.estValide(move4, player1));
+		assertFalse(p1.estValide(move4, PlateauFousFous.JBLANC));
 		
 		// Manque test menace
+		PlateauFousFous p4 = new PlateauFousFous();
+		p4.setFromFile("plateauTest7");
+		String move5 = "C2-E4";
+		assertTrue(p4.estValide(move5, PlateauFousFous.JBLANC));
+		String move6 = "C2-D3";
+		assertFalse(p4.estValide(move6, PlateauFousFous.JBLANC));
+		String move7 = "F3-E4";
+		assertTrue(p4.estValide(move7, PlateauFousFous.JNOIR));
+		String move8 = "F3-D5";
+		assertFalse(p4.estValide(move8, PlateauFousFous.JNOIR));
+		
+		//Réflechir à des exemples complexes (genre un pion obligé de prendre et un autre obligé de menacer --> test si les deux sont ok)
 	}
 	
 	@Test

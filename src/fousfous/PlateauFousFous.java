@@ -22,8 +22,8 @@ public class PlateauFousFous implements Partie1 {
 	
 	private final int LIMIT = 8;
 	
-	private final String JBLANC = "Blanc";
-	private final String JNOIR = "Noir";
+	public static final String JBLANC = "Blanc";
+	public static final String JNOIR = "Noir";
 	
 	private int[][] plateau;
 	
@@ -144,9 +144,9 @@ public class PlateauFousFous implements Partie1 {
 		i = cell.getHeight() - 1;
 		j = cell.getWidth() + 1;
 		while(i >= 0 && j < LIMIT){
-			if(this.plateau[i][j] == (player == this.JBLANC ? NOIR : BLANC)){
+			if(this.plateau[i][j] == (player == JBLANC ? NOIR : BLANC)){
 				return true;
-			} else if(this.plateau[i][j] == (player == this.JBLANC ? BLANC : NOIR)){
+			} else if(this.plateau[i][j] == (player == JBLANC ? BLANC : NOIR)){
 				break;
 			}
 			i--;
@@ -157,9 +157,9 @@ public class PlateauFousFous implements Partie1 {
 		i = cell.getHeight() + 1;
 		j = cell.getWidth() - 1;
 		while(i < LIMIT && j >= 0){
-			if(this.plateau[i][j] == (player == this.JBLANC ? NOIR : BLANC)){
+			if(this.plateau[i][j] == (player == JBLANC ? NOIR : BLANC)){
 				return true;
-			} else if(this.plateau[i][j] == (player == this.JBLANC ? BLANC : NOIR)){
+			} else if(this.plateau[i][j] == (player == JBLANC ? BLANC : NOIR)){
 				break;
 			}
 			i++;
@@ -170,9 +170,9 @@ public class PlateauFousFous implements Partie1 {
 		i = cell.getHeight() - 1;
 		j = cell.getWidth() - 1;
 		while(i >= 0 && j >= 0){
-			if(this.plateau[i][j] == (player == this.JBLANC ? NOIR : BLANC)){
+			if(this.plateau[i][j] == (player == JBLANC ? NOIR : BLANC)){
 				return true;
-			} else if(this.plateau[i][j] == (player == this.JBLANC ? BLANC : NOIR)){
+			} else if(this.plateau[i][j] == (player == JBLANC ? BLANC : NOIR)){
 				break;
 			}
 			i--;
