@@ -344,7 +344,15 @@ public class PlateauFousFous implements Partie1 {
 
 	public void play(String move, String player) {
 		// TODO Auto-generated method stub
-
+		if(!this.estValide(move, player)){
+			throw new RuntimeException("Coup invalide : " + move + ", pour joueur : " + player);
+		}
+		
+		Cell cFst = this.parseCell(move.split("-")[0]);
+		Cell cSnd = this.parseCell(move.split("-")[1]);
+		
+		this.plateau[cSnd.getHeight()][cSnd.getWidth()] = this.plateau[cFst.getHeight()][cFst.getWidth()];
+		this.plateau[cFst.getHeight()][cFst.getWidth()] = VIDE;
 	}
 
 	public boolean finDePartie() {
