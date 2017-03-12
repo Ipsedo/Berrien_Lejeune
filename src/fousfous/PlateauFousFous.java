@@ -457,7 +457,7 @@ public class PlateauFousFous implements Partie1 {
 		Scanner reader = new Scanner(System.in);  // Reading from System.in
 		while(!p.finDePartie()){
 			System.out.println(p);
-			System.out.println("C'est à " + joueurs[tour] + " de joueur !");
+			System.out.println("C'est à " + joueurs[tour] + " de jouer !");
 			for(String mv : p.mouvementsPossibles(joueurs[tour])){
 				System.out.print(mv + ", ");
 			}
