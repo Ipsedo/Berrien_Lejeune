@@ -204,7 +204,7 @@ public class PlateauFousFous implements Partie1 {
 		
 		// test si trajectoire va en direction haut/droite
 		if(i1 > i2 && j1 < j2){
-			while(i1-1 < i2 && j1+1 < j2){
+			while(i1-1 > i2 && j1+1 < j2){
 				if(this.plateau[i1-1][j1+1] != VIDE){
 					return false;
 				} else {
