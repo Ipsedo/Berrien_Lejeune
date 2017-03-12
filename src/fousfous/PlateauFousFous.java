@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import utils.Partie1;
 
@@ -386,7 +387,9 @@ public class PlateauFousFous implements Partie1 {
 			}
 		}
 		
-		return (String[]) tmpRes.toArray();
+		String[] res = new String[tmpRes.size()];
+		res = tmpRes.toArray(res);
+		return res;
 	}
 
 	public void play(String move, String player) {
@@ -417,6 +420,25 @@ public class PlateauFousFous implements Partie1 {
 		return nbBlanc == 0 || nbNoir == 0;
 	}
 	
+	public String toString(){
+		String res = "% ABCDEFGH %\n";
+		for(int i = 0; i < LIMIT; i ++){
+			res += (i+1) + " ";
+			for(int j = 0; j < LIMIT; j++){
+				if(this.plateau[i][j] == VIDE){
+					res += "-";
+				} else if(this.plateau[i][j] == BLANC){
+					res += "b";
+				} else if(this.plateau[i][j] == NOIR){
+					res += "n";
+				}
+			}
+			res += " " + (i+1) + "\n";
+		}
+		res += "%ABCDEFGH%\n";
+		return res;
+	}
+	
 	
 	/**
 	 * 
@@ -426,6 +448,25 @@ public class PlateauFousFous implements Partie1 {
 		//TODO Faire les tests (save/load un plateau, verfier les methodes servantes à estValide() )
 		PlateauFousFous p = new PlateauFousFous();
 		p.setFromFile("plateau.txt");
+		
+		String[] joueurs = new String[]{PlateauFousFous.JBLANC, PlateauFousFous.JNOIR};
+		int tour = 0;
+		
+		Scanner reader = new Scanner(System.in);  // Reading from System.in
+		while(!p.finDePartie()){
+			System.out.println(p);
+			for(String mv : p.mouvementsPossibles(joueurs[tour])){
+				System.out.print(mv + ", ");
+			}
+			System.out.println("");
+			String move = reader.next();
+			while(!p.estValide(move, joueurs[tour])){
+				move = reader.next();
+			}
+			p.play(move, joueurs[tour]);
+			tour = 1 - tour;
+		}
+		reader.close();
 	}
 	
 }
