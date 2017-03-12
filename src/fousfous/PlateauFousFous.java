@@ -21,7 +21,7 @@ public class PlateauFousFous implements Partie1 {
 	private final int NOIR = -1;
 	private final int VIDE = 0;
 	
-	private final int LIMIT = 8;
+	public static final int LIMIT = 8;
 	
 	public static final String JBLANC = "Blanc";
 	public static final String JNOIR = "Noir";
