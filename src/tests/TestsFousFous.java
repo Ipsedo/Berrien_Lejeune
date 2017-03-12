@@ -131,6 +131,14 @@ public class TestsFousFous {
 		assertFalse(p4.estValide(move8, PlateauFousFous.JNOIR));
 		
 		//Réflechir à des exemples complexes (genre un pion obligé de prendre et un autre obligé de menacer --> test si les deux sont ok)
+		
+		//Test pion blanc est obligé de prendre le pion en F3 et ne peut pas menacer celui en G6
+		PlateauFousFous p5 = new PlateauFousFous();
+		p5.setFromFile("plateauTest8");
+		String move9 = "D5-F3";
+		assertTrue(p5.estValide(move9, PlateauFousFous.JBLANC));
+		String move10 = "D5-F7";
+		assertFalse(p5.estValide(move10, PlateauFousFous.JBLANC));
 	}
 	
 	@Test
