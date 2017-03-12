@@ -156,12 +156,21 @@ public class TestsFousFous {
 	public void testMouvementsPossibles() {
 		PlateauFousFous p1 = new PlateauFousFous();
 		p1.setFromFile("plateauTest2");
-		List<String> actual = Arrays.asList(p1.mouvementsPossibles(PlateauFousFous.JBLANC));
-		List<String> expected = Arrays.asList("F3-E4","F3-E2");
-		assertThat(actual, is(expected));
+		List<String> actual1 = Arrays.asList(p1.mouvementsPossibles(PlateauFousFous.JBLANC));
+		List<String> expected1 = Arrays.asList("F3-E4","F3-E2");
+		assertThat(actual1, is(expected1));
 		
-	//	PlateauFousFous p2 = new PlateauFousFous();
+		PlateauFousFous p2 = new PlateauFousFous();
+		p2.setFromFile("plateauTest9");
+		List<String> actual2 = Arrays.asList(p2.mouvementsPossibles(PlateauFousFous.JBLANC));
+		List<String> expected2 = Arrays.asList("D5-E6","D5-F3","D5-B3","E2-F3");
+		assertThat(actual2, is(expected2));
 		
+		PlateauFousFous p3 = new PlateauFousFous();
+		p3.setFromFile("plateauTest10");
+		List<String> actual3 = Arrays.asList(p3.mouvementsPossibles(PlateauFousFous.JBLANC));
+		List<String> expected3 = Arrays.asList("D5-E6","D5-F3","D5-B3","E2-F3","E8-F7","E8-H5","E8-D7","E8-A4");
+		assertThat(actual3, is(expected3));
 	}
 	
 	@Test
