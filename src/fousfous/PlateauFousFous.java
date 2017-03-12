@@ -353,32 +353,32 @@ public class PlateauFousFous implements Partie1 {
 				//diagonale en bas à droite
 				for(int k = i + 1, l = j + 1; k < LIMIT && l < LIMIT; k++, l++){
 					Cell sndCell = new Cell(k, l);
-					if(this.estValide(fstCell.toString() + "-" + sndCell.toString(), player)){
-						tmpRes.add(fstCell.toString() + "-" + sndCell.toString());
+					if(this.estValide(fstCell + "-" + sndCell, player)){
+						tmpRes.add(fstCell + "-" + sndCell);
 					}
 				}
 				
 				//diagonale en bas à gauche
 				for(int k = i + 1, l = j - 1; k < LIMIT && l >= 0; k++, l--){
 					Cell sndCell = new Cell(k, l);
-					if(this.estValide(fstCell.toString() + "-" + sndCell.toString(), player)){
-						tmpRes.add(fstCell.toString() + "-" + sndCell.toString());
+					if(this.estValide(fstCell + "-" + sndCell, player)){
+						tmpRes.add(fstCell + "-" + sndCell);
 					}
 				}
 				
 				//diagonale en haut à droite
 				for(int k = i - 1, l = j + 1; k >= 0 && l < LIMIT; k--, l++){
 					Cell sndCell = new Cell(k, l);
-					if(this.estValide(fstCell.toString() + "-" + sndCell.toString(), player)){
-						tmpRes.add(fstCell.toString() + "-" + sndCell.toString());
+					if(this.estValide(fstCell + "-" + sndCell, player)){
+						tmpRes.add(fstCell + "-" + sndCell);
 					}
 				}
 				
 				//diagonale en haut à gauche
 				for(int k = i - 1, l = j - 1; k >= 0 && l >= 0; k--, l--){
 					Cell sndCell = new Cell(k, l);
-					if(this.estValide(fstCell.toString() + "-" + sndCell.toString(), player)){
-						tmpRes.add(fstCell.toString() + "-" + sndCell.toString());
+					if(this.estValide(fstCell + "-" + sndCell, player)){
+						tmpRes.add(fstCell + "-" + sndCell);
 					}
 				}
 				
