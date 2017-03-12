@@ -188,6 +188,7 @@ public class PlateauFousFous implements Partie1 {
 		int i2 = snd.getHeight();
 		int j2 = snd.getWidth();
 		
+		//On regarde si la trajectoire est bien une diagonale
 		if(Math.abs(i1 - i2) != Math.abs(j1 - j2)){
 			return false;
 		}
