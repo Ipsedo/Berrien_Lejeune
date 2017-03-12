@@ -152,15 +152,17 @@ public class TestsFousFous {
 		
 	}
 	
-/*	@Test
+	@Test
 	public void testMouvementsPossibles() {
 		PlateauFousFous p1 = new PlateauFousFous();
 		p1.setFromFile("plateauTest2");
 		List<String> actual = Arrays.asList(p1.mouvementsPossibles(PlateauFousFous.JBLANC));
-		List<String> expected = Arrays.asList("F3-E2","F3-E4");
+		List<String> expected = Arrays.asList("F3-E4","F3-E2");
 		assertThat(actual, is(expected));
 		
-	}*/
+	//	PlateauFousFous p2 = new PlateauFousFous();
+		
+	}
 	
 	@Test
 	public void testFinDePartie() {
