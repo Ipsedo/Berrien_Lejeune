@@ -1,6 +1,10 @@
 package tests;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -45,6 +49,7 @@ public class TestsFousFous {
 		String curr3 = "D5";
 		Cell currCell3 = p3.parseCell(curr3);
 		assertTrue(p3.doitPrendre(currCell3, PlateauFousFous.JNOIR));
+		
 	}
 	
 	@Test
@@ -66,6 +71,13 @@ public class TestsFousFous {
 		Cell fstCell2 = p1.parseCell(fst2);
 		Cell sndCell2 = p1.parseCell(snd2);
 		assertFalse(p2.trajectoireOK(fstCell2, sndCell2));
+		
+		// Test trajectoire pas bonne
+		PlateauFousFous p4 = new PlateauFousFous();
+		p4.setFromFile("plateau.txt");
+		String fst3 = "B7";
+		String snd3 = "E4";
+		assertFalse(p4.trajectoireOK(p4.parseCell(fst3), p4.parseCell(snd3)));
 	}
 	
 	@Test
@@ -118,7 +130,7 @@ public class TestsFousFous {
 		String move4 = "F3-H5";
 		assertFalse(p1.estValide(move4, PlateauFousFous.JBLANC));
 		
-		// Manque test menace
+		// Tests de menace
 		PlateauFousFous p4 = new PlateauFousFous();
 		p4.setFromFile("plateauTest7");
 		String move5 = "C2-E4";
@@ -130,16 +142,25 @@ public class TestsFousFous {
 		String move8 = "F3-D5";
 		assertFalse(p4.estValide(move8, PlateauFousFous.JNOIR));
 		
-		//Réflechir à des exemples complexes (genre un pion obligé de prendre et un autre obligé de menacer --> test si les deux sont ok)
-		
-		//Test pion blanc est obligé de prendre le pion en F3 et ne peut pas menacer celui en G6
+		//Test pion blanc obligé de prendre le pion en F3 et ne peut pas menacer celui en G6
 		PlateauFousFous p5 = new PlateauFousFous();
 		p5.setFromFile("plateauTest8");
 		String move9 = "D5-F3";
 		assertTrue(p5.estValide(move9, PlateauFousFous.JBLANC));
 		String move10 = "D5-F7";
 		assertFalse(p5.estValide(move10, PlateauFousFous.JBLANC));
+		
 	}
+	
+/*	@Test
+	public void testMouvementsPossibles() {
+		PlateauFousFous p1 = new PlateauFousFous();
+		p1.setFromFile("plateauTest2");
+		List<String> actual = Arrays.asList(p1.mouvementsPossibles(PlateauFousFous.JBLANC));
+		List<String> expected = Arrays.asList("F3-E2","F3-E4");
+		assertThat(actual, is(expected));
+		
+	}*/
 	
 	@Test
 	public void testFinDePartie() {
