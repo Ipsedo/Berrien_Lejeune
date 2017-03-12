@@ -126,7 +126,7 @@ public class PlateauFousFous implements Partie1 {
 	 * @return True if the cell's pion must take another pion
 	 */
 	public boolean doitPrendre(Cell cell, String player){
-		// On regarde la diagonale en haut à droite
+		// On regarde la diagonale en bas à droite
 		int i = cell.getHeight() + 1;
 		int j = cell.getWidth() + 1;
 		while(i < LIMIT && j < LIMIT){
@@ -141,7 +141,7 @@ public class PlateauFousFous implements Partie1 {
 			j++;
 		}
 		
-		// Diagonale bas/droite
+		// Diagonale haut/droite
 		i = cell.getHeight() - 1;
 		j = cell.getWidth() + 1;
 		while(i >= 0 && j < LIMIT){
@@ -154,7 +154,7 @@ public class PlateauFousFous implements Partie1 {
 			j++;
 		}
 		
-		// Diagonale haut/gauche
+		// Diagonale bas/gauche
 		i = cell.getHeight() + 1;
 		j = cell.getWidth() - 1;
 		while(i < LIMIT && j >= 0){
@@ -167,7 +167,7 @@ public class PlateauFousFous implements Partie1 {
 			j--;
 		}
 		
-		// Diagonale bas/gauche
+		// Diagonale haut/gauche
 		i = cell.getHeight() - 1;
 		j = cell.getWidth() - 1;
 		while(i >= 0 && j >= 0){
