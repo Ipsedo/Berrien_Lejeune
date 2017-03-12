@@ -450,7 +450,6 @@ public class PlateauFousFous implements Partie1 {
 	 * @param args Arguments
 	 */
 	public static void main(String[] args){
-		//TODO Faire les tests (save/load un plateau, verfier les methodes servantes à estValide() )
 		PlateauFousFous p = new PlateauFousFous();
 		p.setFromFile("plateau.txt");
 		
