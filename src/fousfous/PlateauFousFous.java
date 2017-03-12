@@ -467,6 +467,7 @@ public class PlateauFousFous implements Partie1 {
 			System.out.println("");
 			String move = reader.next();
 			while(!p.estValide(move, joueurs[tour])){
+				System.out.println("Entrez un coup valide !");
 				move = reader.next();
 			}
 			p.play(move, joueurs[tour]);
