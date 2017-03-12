@@ -312,6 +312,11 @@ public class PlateauFousFous implements Partie1 {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param cell The current cell
+	 * @return true if the current cell is out of bounds
+	 */
 	public boolean outOfBounds(Cell cell){
 		return !(cell.getHeight() >= 0 && cell.getHeight() < LIMIT && cell.getWidth() >= 0 && cell.getWidth() < LIMIT); 
 	}
@@ -387,8 +392,6 @@ public class PlateauFousFous implements Partie1 {
 			}
 		}
 		
-		System.out.println(tmpRes.size());
-		
 		String[] res = new String[tmpRes.size()];
 		res = tmpRes.toArray(res);
 		return res;
@@ -459,7 +462,7 @@ public class PlateauFousFous implements Partie1 {
 			System.out.println(p);
 			System.out.println("C'est à " + joueurs[tour] + " de joueur !");
 			for(String mv : p.mouvementsPossibles(joueurs[tour])){
-				System.out.print(mv + ", ");
+				System.out.print("[" + mv + "], ");
 			}
 			System.out.println("");
 			String move = reader.next();
