@@ -349,42 +349,40 @@ public class PlateauFousFous implements Partie1 {
 		
 		for(int i = 0; i < LIMIT ; i++){
 			for(int j = 0; j < LIMIT; j++){
-				if(this.plateau[i][j] == (player == JBLANC ? BLANC : NOIR)){
-					Cell fstCell = new Cell(i, j);
+				Cell fstCell = new Cell(i, j);
 	
-					//diagonale en bas à droite
-					for(int k = i + 1, l = j + 1; k < LIMIT && l < LIMIT; k++, l++){
-						Cell sndCell = new Cell(k, l);
-						System.out.println(fstCell.toString() + "-" + sndCell.toString());
-						if(this.estValide(fstCell.toString() + "-" + sndCell.toString(), player)){
-							tmpRes.add(fstCell.toString() + "-" + sndCell.toString());
-						}
-					}
-					
-					//diagonale en bas à gauche
-					for(int k = i + 1, l = j - 1; k < LIMIT && l >= 0; k++, l--){
-						Cell sndCell = new Cell(k, l);
-						if(this.estValide(fstCell.toString() + "-" + sndCell.toString(), player)){
-							tmpRes.add(fstCell.toString() + "-" + sndCell.toString());
-						}
-					}
-					
-					//diagonale en haut à droite
-					for(int k = i - 1, l = j + 1; k >= 0 && l < LIMIT; k--, l++){
-						Cell sndCell = new Cell(k, l);
-						if(this.estValide(fstCell.toString() + "-" + sndCell.toString(), player)){
-							tmpRes.add(fstCell.toString() + "-" + sndCell.toString());
-						}
-					}
-					
-					//diagonale en haut à gauche
-					for(int k = i - 1, l = j - 1; k >= 0 && l >= 0; k--, l--){
-						Cell sndCell = new Cell(k, l);
-						if(this.estValide(fstCell.toString() + "-" + sndCell.toString(), player)){
-							tmpRes.add(fstCell.toString() + "-" + sndCell.toString());
-						}
+				//diagonale en bas à droite
+				for(int k = i + 1, l = j + 1; k < LIMIT && l < LIMIT; k++, l++){
+					Cell sndCell = new Cell(k, l);
+					if(this.estValide(fstCell.toString() + "-" + sndCell.toString(), player)){
+						tmpRes.add(fstCell.toString() + "-" + sndCell.toString());
 					}
 				}
+				
+				//diagonale en bas à gauche
+				for(int k = i + 1, l = j - 1; k < LIMIT && l >= 0; k++, l--){
+					Cell sndCell = new Cell(k, l);
+					if(this.estValide(fstCell.toString() + "-" + sndCell.toString(), player)){
+						tmpRes.add(fstCell.toString() + "-" + sndCell.toString());
+					}
+				}
+				
+				//diagonale en haut à droite
+				for(int k = i - 1, l = j + 1; k >= 0 && l < LIMIT; k--, l++){
+					Cell sndCell = new Cell(k, l);
+					if(this.estValide(fstCell.toString() + "-" + sndCell.toString(), player)){
+						tmpRes.add(fstCell.toString() + "-" + sndCell.toString());
+					}
+				}
+				
+				//diagonale en haut à gauche
+				for(int k = i - 1, l = j - 1; k >= 0 && l >= 0; k--, l--){
+					Cell sndCell = new Cell(k, l);
+					if(this.estValide(fstCell.toString() + "-" + sndCell.toString(), player)){
+						tmpRes.add(fstCell.toString() + "-" + sndCell.toString());
+					}
+				}
+				
 			}
 		}
 		
