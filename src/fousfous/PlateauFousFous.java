@@ -243,7 +243,7 @@ public class PlateauFousFous implements Partie1 {
 		
 		// test trajectoire direction bas/gauche
 		if(i1 < i2 && j1 > j2){
-			while(i1+1 < i2 && j1-1 < j2){
+			while(i1+1 < i2 && j1-1 > j2){
 				if(this.plateau[i1+1][j1-1] != VIDE){
 					return false;
 				} else {
@@ -253,6 +253,7 @@ public class PlateauFousFous implements Partie1 {
 			}
 			return true;
 		}
+		
 		
 		return false;
 	}
