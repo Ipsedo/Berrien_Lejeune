@@ -44,7 +44,12 @@ public class PlateauFousFous implements Partie1 {
 	}
 	
 	private PlateauFousFous(int[][] plateau){
-		this.plateau = plateau;
+		this.plateau = new int[PlateauFousFous.LIMIT][PlateauFousFous.LIMIT];
+		for(int i = 0; i < PlateauFousFous.LIMIT; i++){
+			for(int j = 0; j < PlateauFousFous.LIMIT; j++){
+				this.plateau[i][j] = plateau[i][j];
+			}
+		}
 	}
 
 	public void setFromFile(String fileName) {
@@ -395,8 +400,8 @@ public class PlateauFousFous implements Partie1 {
 
 	public void play(String move, String player) {
 		// TODO Auto-generated method stub
-		System.out.println(move);
-		System.out.println(this);
+		//System.out.println(move);
+		//System.out.println(this);
 		if(!this.estValide(move, player)){
 			throw new RuntimeException("Coup invalide : " + move + ", pour joueur : " + player);
 		}
@@ -462,8 +467,8 @@ public class PlateauFousFous implements Partie1 {
 		return sum;
 	}
 	
-	public PlateauFousFous clone(){
-		return new PlateauFousFous(this.plateau.clone());
+	public PlateauFousFous copy(){
+		return new PlateauFousFous(this.plateau);
 	}
 	
 	
