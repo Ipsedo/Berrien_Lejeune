@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class TestNegABJoueur implements IJoueur {
 	
-	private int profMax;
+	private int profMax = 4;
 	
 	private String mName;
 	private int mColor;
@@ -36,7 +36,6 @@ public class TestNegABJoueur implements IJoueur {
 			this.joueurMax = PlateauFousFous.JNOIR;
 		}
 		this.mPartie = new PlateauFousFous();
-		this.profMax = 4;
 		this.h = HeuristiqueFousFous.ffH1;
 	}
 
@@ -65,6 +64,8 @@ public class TestNegABJoueur implements IJoueur {
 
 	public String choixMouvement() {
 		// TODO Auto-generated method stub
+		System.out.println("NegAB, profondeur max : " + this.profMax);
+		
 		ArrayList<String> coupsPossibles = new ArrayList<String>(Arrays.asList(this.mPartie.mouvementsPossibles(this.joueurMax)));
 		
 		if(coupsPossibles.isEmpty()){
