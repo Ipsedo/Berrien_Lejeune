@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import utils.Partie1;
 
 /**
  * 
@@ -449,7 +448,7 @@ public class PlateauFousFous implements Partie1 {
 		String[] joueurs = new String[]{PlateauFousFous.JBLANC, PlateauFousFous.JNOIR};
 		int tour = 0;
 		
-		Scanner reader = new Scanner(System.in);  // Reading from System.in
+		Scanner reader = new Scanner(System.in);
 		while(!p.finDePartie()){
 			System.out.println(p);
 			System.out.println("C'est à " + joueurs[tour] + " de jouer !");

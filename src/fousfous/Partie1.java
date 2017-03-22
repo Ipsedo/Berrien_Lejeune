@@ -1,4 +1,4 @@
-package utils;
+package fousfous;
 
 public interface Partie1 {
 
