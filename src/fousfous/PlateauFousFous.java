@@ -42,6 +42,10 @@ public class PlateauFousFous implements Partie1 {
 				{NOIR, VIDE, NOIR, VIDE, NOIR, VIDE, NOIR, VIDE}
 		};
 	}
+	
+	private PlateauFousFous(int[][] plateau){
+		this.plateau = plateau;
+	}
 
 	public void setFromFile(String fileName) {
 		try {
@@ -391,6 +395,7 @@ public class PlateauFousFous implements Partie1 {
 
 	public void play(String move, String player) {
 		// TODO Auto-generated method stub
+		System.out.println(move);
 		if(!this.estValide(move, player)){
 			throw new RuntimeException("Coup invalide : " + move + ", pour joueur : " + player);
 		}
@@ -434,6 +439,30 @@ public class PlateauFousFous implements Partie1 {
 		}
 		res += "% ABCDEFGH %\n";
 		return res;
+	}
+	
+	public int getNbBlanc(){
+		int sum = 0;
+		for(int[] line : this.plateau){
+			for(int cell : line){
+				sum += (cell == BLANC ? 1 : 0);
+			}
+		}
+		return sum;
+	}
+	
+	public int getNbNoir(){
+		int sum = 0;
+		for(int[] line : this.plateau){
+			for(int cell : line){
+				sum += (cell == NOIR ? 1 : 0);
+			}
+		}
+		return sum;
+	}
+	
+	public PlateauFousFous clone(){
+		return new PlateauFousFous(this.plateau);
 	}
 	
 	
