@@ -49,7 +49,7 @@ public class Solo {
     private static IJoueur getDefaultPlayer(String s) {
 	System.out.println(s + " : defaultPlayer");
 	// vous devez faire qq chose comme return new MonMeilleurJoueur();
-		return new TestNegABJoueur();
+		return new TestNegABJoueur(s);
 
     }
 

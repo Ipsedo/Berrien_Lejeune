@@ -8,6 +8,7 @@ public class TestNegABJoueur implements IJoueur {
 	
 	private int profMax;
 	
+	private String mName;
 	private int mColor;
 	private String joueurMax;
 	private String joueurMin;
@@ -15,8 +16,8 @@ public class TestNegABJoueur implements IJoueur {
 	
 	private HeuristiqueFousFous h;
 	
-	public TestNegABJoueur(){
-		
+	public TestNegABJoueur(String name){
+		this.mName = name;
 	}
 
 	public void initJoueur(int mycolour) {
@@ -69,7 +70,7 @@ public class TestNegABJoueur implements IJoueur {
 		alpha = -this.negAB(this.profMax - 1, tmpP, -beta, -alpha, -1);
 		for(String c : coupsPossibles){
 			tmpP = this.mPartie.clone();
-			tmpP.play(this.joueurMax, c);
+			tmpP.play(c, this.joueurMax);
 			int newVal = -this.negAB(this.profMax - 1, tmpP, -beta, -alpha, -1);
 			System.out.println(newVal);
 			if(newVal > alpha){
@@ -94,7 +95,7 @@ public class TestNegABJoueur implements IJoueur {
 
 	public String binoName() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.mName;
 	}
 
 }

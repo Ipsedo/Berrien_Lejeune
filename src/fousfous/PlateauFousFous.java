@@ -396,6 +396,7 @@ public class PlateauFousFous implements Partie1 {
 	public void play(String move, String player) {
 		// TODO Auto-generated method stub
 		System.out.println(move);
+		System.out.println(this);
 		if(!this.estValide(move, player)){
 			throw new RuntimeException("Coup invalide : " + move + ", pour joueur : " + player);
 		}
@@ -462,7 +463,7 @@ public class PlateauFousFous implements Partie1 {
 	}
 	
 	public PlateauFousFous clone(){
-		return new PlateauFousFous(this.plateau);
+		return new PlateauFousFous(this.plateau.clone());
 	}
 	
 	
