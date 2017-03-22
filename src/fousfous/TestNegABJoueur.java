@@ -1,6 +1,5 @@
 package fousfous;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -112,5 +111,4 @@ public class TestNegABJoueur implements IJoueur {
 		// TODO Auto-generated method stub
 		return this.mName;
 	}
-
 }
