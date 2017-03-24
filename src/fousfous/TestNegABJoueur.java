@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class TestNegABJoueur implements IJoueur {
 	
-	private int profMax = 4;
+	private int profMax;
 	
 	private String mName;
 	private int mColor;
@@ -15,25 +15,21 @@ public class TestNegABJoueur implements IJoueur {
 	
 	private Heuristique h;
 	
-	public TestNegABJoueur(String name){
-		this.mName = name;
-	}
-	
-	public TestNegABJoueur(String name, int prof){
-		this(name);
-		this.profMax = prof;
+	public TestNegABJoueur(){
 	}
 
 	public void initJoueur(int mycolour) {
 		// TODO Auto-generated method stub
 		this.mColor = mycolour;
-		if(this.mColor == 1){
+		if(this.mColor == -1){
 			this.joueurMax = PlateauFousFous.JBLANC;
 			this.joueurMin = PlateauFousFous.JNOIR;
 		} else {
 			this.joueurMin = PlateauFousFous.JBLANC;
 			this.joueurMax = PlateauFousFous.JNOIR;
 		}
+		this.mName = "TestNegAB";
+		this.profMax = 5;
 		this.mPartie = new PlateauFousFous();
 		this.h = HeuristiqueFousFous.ffH1;
 	}
@@ -92,6 +88,7 @@ public class TestNegABJoueur implements IJoueur {
 			}
 		}
 		this.mPartie.play(meilleurCoup, this.joueurMax);
+		System.out.println("A joué : " + meilleurCoup);
 		System.out.println(this.mPartie);
 		return meilleurCoup;
 	}

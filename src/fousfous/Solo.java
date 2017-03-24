@@ -49,11 +49,7 @@ public class Solo {
     private static IJoueur getDefaultPlayer(String s) {
 	System.out.println(s + " : defaultPlayer");
 	// vous devez faire qq chose comme return new MonMeilleurJoueur();
-		if(s == "Blanc"){
-			return new TestNegABJoueur(s, 8);
-		} else {
-			return new TestNegABJoueur(s);
-		}
+		return new TestNegABJoueur();
 
     }
 
