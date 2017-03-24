@@ -1,6 +1,9 @@
 package fousfous;
 
 public class InfosPlateau {
+	
+	/** besoin de savoir qui est le joueur courant ? **/
+	private String joueurCourant;
 
 	private int prof;
 	
@@ -11,7 +14,12 @@ public class InfosPlateau {
 	
 	private String meilleurCoup;
 	
-	public InfosPlateau(int prof, Flag flag, int val, String meilleurCoup){
+	public InfosPlateau(){
+		
+	}
+	
+	public InfosPlateau(String joueurCourant, int prof, Flag flag, int val, String meilleurCoup){
+		this.joueurCourant = joueurCourant;
 		this.prof = prof;
 		this.mFlag = flag;
 		this.val = val;
