@@ -5,13 +5,12 @@ import java.util.Arrays;
 
 public class NegABJoueur implements IJoueur {
 	
-	private int profMax = 4;
+	protected int profMax = 4;
 	
-	private String mName = "NegAB";
 	private int mColor;
 	private String joueurMax;
 	private String joueurMin;
-	private PlateauFousFous mPartie = new PlateauFousFous();
+	protected PlateauFousFous mPartie = new PlateauFousFous();
 	
 	private Heuristique h = HeuristiqueFousFous.ffH1;
 	
@@ -105,6 +104,6 @@ public class NegABJoueur implements IJoueur {
 
 	public String binoName() {
 		// TODO Auto-generated method stub
-		return this.mName;
+		return "NegAB";
 	}
 }
