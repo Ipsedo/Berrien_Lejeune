@@ -29,7 +29,7 @@ public class TestNegABJoueur implements IJoueur {
 			this.joueurMax = PlateauFousFous.JNOIR;
 		}
 		this.mName = "TestNegAB";
-		this.profMax = 5;
+		this.profMax = (int) (Math.random() * 5d + 1d);
 		this.mPartie = new PlateauFousFous();
 		this.h = HeuristiqueFousFous.ffH1;
 	}
@@ -95,6 +95,9 @@ public class TestNegABJoueur implements IJoueur {
 
 	public void declareLeVainqueur(int colour) {
 		// TODO Auto-generated method stub
+		if(colour == this.mColor){
+			System.out.println("Hasta la vista, baby");
+		}
 
 	}
 
