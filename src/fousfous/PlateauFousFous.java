@@ -27,8 +27,6 @@ public class PlateauFousFous implements Partie1 {
 	
 	private int[][] plateau;
 	
-	public static enum PHASE {DEBUT, MILIEU, FIN};
-	
 	/**
 	 * 
 	 */
@@ -473,15 +471,15 @@ public class PlateauFousFous implements Partie1 {
 		return new PlateauFousFous(this.plateau);
 	}
 	
-	public PHASE getGamePhase(){
+	public PhaseJeu getGamePhase(){
 		if(this.getNbBlanc() > 10 && this.getNbNoir() > 10){
-			return PlateauFousFous.PHASE.DEBUT;
+			return PhaseJeu.DEBUT;
 		}else if(this.getNbBlanc() > 8 || this.getNbNoir() > 8){
-			return PlateauFousFous.PHASE.MILIEU;
-		}else if(this.getNbBlanc() < 8 || this.getNbNoir() < 8){
-			return PlateauFousFous.PHASE.MILIEU;
+			return PhaseJeu.MILIEU;
+		}else if((this.getNbBlanc() < 8 && this.getNbBlanc() > 5) || (this.getNbNoir() < 8 && this.getNbNoir() > 5)){
+			return PhaseJeu.MILIEU;
 		}else{
-			return PlateauFousFous.PHASE.FIN;
+			return PhaseJeu.FIN;
 		}
 	}
 	
@@ -493,6 +491,7 @@ public class PlateauFousFous implements Partie1 {
 	public static void main(String[] args){
 		PlateauFousFous p = new PlateauFousFous();
 		p.setFromFile("plateau.txt");
+		System.out.println(p.getNbBlanc());
 		
 		String[] joueurs = new String[]{PlateauFousFous.JBLANC, PlateauFousFous.JNOIR};
 		int tour = 0;

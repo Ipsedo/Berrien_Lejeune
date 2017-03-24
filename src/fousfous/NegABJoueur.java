@@ -3,11 +3,11 @@ package fousfous;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class TestNegABJoueur implements IJoueur {
+public class NegABJoueur implements IJoueur {
 	
-	private int profMax = (int) (Math.random() * 5d + 1d);
+	private int profMax = 4;
 	
-	private String mName = "TestNegAB";
+	private String mName = "NegAB";
 	private int mColor;
 	private String joueurMax;
 	private String joueurMin;
@@ -15,18 +15,16 @@ public class TestNegABJoueur implements IJoueur {
 	
 	private Heuristique h = HeuristiqueFousFous.ffH1;
 	
-	public TestNegABJoueur(){
+	public NegABJoueur(){
 	}
 
 	public void initJoueur(int mycolour) {
 		// TODO Auto-generated method stub
 		this.mColor = mycolour;
 		if(this.mColor == -1){
-			this.profMax = 8;
 			this.joueurMax = PlateauFousFous.JBLANC;
 			this.joueurMin = PlateauFousFous.JNOIR;
 		} else {
-			this.profMax = 1;
 			this.joueurMin = PlateauFousFous.JBLANC;
 			this.joueurMax = PlateauFousFous.JNOIR;
 		}
