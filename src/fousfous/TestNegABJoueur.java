@@ -5,15 +5,15 @@ import java.util.Arrays;
 
 public class TestNegABJoueur implements IJoueur {
 	
-	private int profMax;
+	private int profMax = (int) (Math.random() * 5d + 1d);
 	
-	private String mName;
+	private String mName = "TestNegAB";
 	private int mColor;
 	private String joueurMax;
 	private String joueurMin;
-	private PlateauFousFous mPartie;
+	private PlateauFousFous mPartie = new PlateauFousFous();
 	
-	private Heuristique h;
+	private Heuristique h = HeuristiqueFousFous.ffH1;
 	
 	public TestNegABJoueur(){
 	}
@@ -22,16 +22,14 @@ public class TestNegABJoueur implements IJoueur {
 		// TODO Auto-generated method stub
 		this.mColor = mycolour;
 		if(this.mColor == -1){
+			this.profMax = 8;
 			this.joueurMax = PlateauFousFous.JBLANC;
 			this.joueurMin = PlateauFousFous.JNOIR;
 		} else {
+			this.profMax = 1;
 			this.joueurMin = PlateauFousFous.JBLANC;
 			this.joueurMax = PlateauFousFous.JNOIR;
 		}
-		this.mName = "TestNegAB";
-		this.profMax = (int) (Math.random() * 5d + 1d);
-		this.mPartie = new PlateauFousFous();
-		this.h = HeuristiqueFousFous.ffH1;
 	}
 
 	public int getNumJoueur() {
