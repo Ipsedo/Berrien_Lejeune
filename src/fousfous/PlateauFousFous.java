@@ -27,6 +27,8 @@ public class PlateauFousFous implements Partie1 {
 	
 	private int[][] plateau;
 	
+	public static enum PHASE {DEBUT, MILIEU, FIN};
+	
 	/**
 	 * 
 	 */
@@ -469,6 +471,18 @@ public class PlateauFousFous implements Partie1 {
 	
 	public PlateauFousFous copy(){
 		return new PlateauFousFous(this.plateau);
+	}
+	
+	public PHASE getGamePhase(){
+		if(this.getNbBlanc() > 10 && this.getNbNoir() > 10){
+			return PlateauFousFous.PHASE.DEBUT;
+		}else if(this.getNbBlanc() > 8 || this.getNbNoir() > 8){
+			return PlateauFousFous.PHASE.MILIEU;
+		}else if(this.getNbBlanc() < 8 || this.getNbNoir() < 8){
+			return PlateauFousFous.PHASE.MILIEU;
+		}else{
+			return PlateauFousFous.PHASE.FIN;
+		}
 	}
 	
 	
