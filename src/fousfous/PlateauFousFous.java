@@ -472,11 +472,11 @@ public class PlateauFousFous implements Partie1 {
 	}
 	
 	public PhaseJeu getGamePhase(){
-		if(this.getNbBlanc() > 10 && this.getNbNoir() > 10){
+		if(this.getNbBlanc() > 11 && this.getNbNoir() > 11){
 			return PhaseJeu.DEBUT;
 		}else if(this.getNbBlanc() > 8 || this.getNbNoir() > 8){
 			return PhaseJeu.MILIEU;
-		}else if((this.getNbBlanc() < 8 && this.getNbBlanc() > 5) || (this.getNbNoir() < 8 && this.getNbNoir() > 5)){
+		}else if((this.getNbBlanc() <= 8 && this.getNbBlanc() >= 5) || (this.getNbNoir() <= 8 && this.getNbNoir() >= 5)){
 			return PhaseJeu.MILIEU;
 		}else{
 			return PhaseJeu.FIN;
