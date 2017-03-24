@@ -13,9 +13,6 @@ public class NegABJoueur implements IJoueur {
 	protected PlateauFousFous mPartie = new PlateauFousFous();
 	
 	private Heuristique h = HeuristiqueFousFous.ffH1;
-	
-	public NegABJoueur(){
-	}
 
 	public void initJoueur(int mycolour) {
 		// TODO Auto-generated method stub
