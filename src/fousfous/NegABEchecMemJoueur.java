@@ -45,7 +45,7 @@ public class NegABEchecMemJoueur implements IJoueur {
 		
 		int alphaInit = alpha;
 		
-		InfosPlateau entreeT = this.transpoTable.get(partie.getPlateau());
+		InfosPlateau entreeT = this.transpoTable.get(partie.getPlateauHashCode());
 		
 		if(entreeT != null && entreeT.getProf() >= prof){ // >= prof ou <= prof vu que notre prof est decrementale
 			switch(entreeT.getFlag()){
@@ -89,7 +89,7 @@ public class NegABEchecMemJoueur implements IJoueur {
 			entreeT.setFlag(InfosPlateau.Flag.EXACTVAL);
 		}
 		entreeT.setProf(prof);
-		this.transpoTable.put(partie.getPlateau().hashCode(), entreeT);
+		this.transpoTable.put(partie.getPlateauHashCode(), entreeT);
 		
 		return max;
 	}

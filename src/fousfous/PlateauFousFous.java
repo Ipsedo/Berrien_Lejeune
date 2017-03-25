@@ -483,8 +483,8 @@ public class PlateauFousFous implements Partie1 {
 		}
 	}
 	
-	public int[][] getPlateau(){
-		return this.plateau.clone();
+	public int getPlateauHashCode(){
+		return this.plateau.hashCode();
 	}
 	
 	
