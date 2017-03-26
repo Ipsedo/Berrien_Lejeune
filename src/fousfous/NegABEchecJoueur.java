@@ -57,40 +57,41 @@ public class NegABEchecJoueur implements IJoueur {
 	}
 
 	public String choixMouvement() {
-		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
-				System.out.println("NegAB, profondeur max : " + this.profMax);
-				
-				ArrayList<String> coupsPossibles = new ArrayList<String>(Arrays.asList(this.mPartie.mouvementsPossibles(this.joueurMax)));
-				
-				if(coupsPossibles.isEmpty()){
-					return "xxxxx";
-				}
-				
-				int alpha = Integer.MIN_VALUE + 1;
-				int beta = Integer.MAX_VALUE - 1;
-				
-			    PlateauFousFous tmpP = this.mPartie.copy();
-			    
-				String meilleurCoup = coupsPossibles.get(0);
-				coupsPossibles.remove(0);
-				tmpP.play(meilleurCoup, this.joueurMax);
-				
-				alpha = -this.negABEchec(this.profMax - 1, tmpP, -beta, -alpha, -1);
-				
-				for(String c : coupsPossibles){
-					tmpP = this.mPartie.copy();
-					tmpP.play(c, this.joueurMax);
-					int newVal = -this.negABEchec(this.profMax - 1, tmpP, -beta, -alpha, -1);
-					if(newVal > alpha){
-						meilleurCoup = c;
-						alpha = newVal;
-					}
-				}
-				this.mPartie.play(meilleurCoup, this.joueurMax);
-				System.out.println("A joué : " + meilleurCoup);
-				System.out.println(this.mPartie);
-				return meilleurCoup;
+		ArrayList<String> coupsPossibles = new ArrayList<String>(Arrays.asList(this.mPartie.mouvementsPossibles(this.joueurMax)));
+		
+		if(coupsPossibles.isEmpty()){
+			return "xxxxx";
+		}
+		
+		int alpha = Integer.MIN_VALUE + 1;
+		int beta = Integer.MAX_VALUE - 1;
+		
+	    PlateauFousFous tmpP = this.mPartie.copy();
+	    
+		String meilleurCoup = coupsPossibles.get(0);
+		coupsPossibles.remove(0);
+		tmpP.play(meilleurCoup, this.joueurMax);
+		
+		int max = Integer.MIN_VALUE + 1;
+		
+		max = Math.max(max, -this.negABEchec(this.profMax - 1, tmpP, -beta, -alpha, -1));
+		
+		for(String c : coupsPossibles){
+			tmpP = this.mPartie.copy();
+			tmpP.play(c, this.joueurMax);
+			max = Math.max(max, -this.negABEchec(this.profMax - 1, tmpP, -beta, -alpha, -1));
+			if(max > alpha){
+				meilleurCoup = c;
+				alpha = max;
+			}
+			if(alpha >= beta){
+				break;
+			}
+		}
+		this.mPartie.play(meilleurCoup, this.joueurMax);
+		System.out.println("A joué : " + meilleurCoup);
+		System.out.println(this.mPartie);
+		return meilleurCoup;
 	}
 
 	public void declareLeVainqueur(int colour) {

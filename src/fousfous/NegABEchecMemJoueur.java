@@ -56,15 +56,20 @@ public class NegABEchecMemJoueur implements IJoueur {
 		coupsPossibles.remove(0);
 		tmpP.play(meilleurCoup, this.joueurMax);
 		
-		alpha = -this.negABEchecMem(this.profMax - 1, tmpP, -beta, -alpha, -1);
+		int max = Integer.MIN_VALUE + 1;
+		
+		max = Math.max(max, -this.negABEchecMem(this.profMax - 1, tmpP, -beta, -alpha, -1));
 		
 		for(String c : coupsPossibles){
 			tmpP = this.mPartie.copy();
 			tmpP.play(c, this.joueurMax);
-			int newVal = -this.negABEchecMem(this.profMax - 1, tmpP, -beta, -alpha, -1);
-			if(newVal > alpha){
+			max = Math.max(max, -this.negABEchecMem(this.profMax - 1, tmpP, -beta, -alpha, -1));
+			if(max > alpha){
 				meilleurCoup = c;
-				alpha = newVal;
+				alpha = max;
+			}
+			if(alpha >= beta){
+				break;
 			}
 		}
 		this.mPartie.play(meilleurCoup, this.joueurMax);

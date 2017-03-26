@@ -28,6 +28,10 @@ public class PlateauFousFous implements Partie1 {
 	
 	private int[][] plateau;
 	
+	public enum PhaseJeu {
+		DEBUT, MILIEU, FIN;
+	}
+	
 	/**
 	 * 
 	 */
