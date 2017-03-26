@@ -1,10 +1,14 @@
 package fousfous;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class NegABEchecMemJoueur implements IJoueur {
 	
-	private HashMap<Integer, InfosPlateau> transpoTable;
+	protected int profMax = 10;
+	
+	private HashMap<Integer, InfosPlateau> transpoTable = new HashMap<Integer, InfosPlateau>();
 	
 	private int mColor;
 	private String joueurMax;
@@ -32,15 +36,51 @@ public class NegABEchecMemJoueur implements IJoueur {
 
 	public String choixMouvement() {
 		// TODO Auto-generated method stub
-		return null;
+		
+		/** pas du tout sûr -> à verifier (mais ça marche et ça va supersupersupzerrrrr viteeee !!!!! */
+		System.out.println("NegABEchecMem, profondeur max : " + this.profMax);
+		
+		ArrayList<String> coupsPossibles = new ArrayList<String>(Arrays.asList(this.mPartie.mouvementsPossibles(this.joueurMax)));
+		
+		if(coupsPossibles.isEmpty()){
+			return "xxxxx";
+		}
+		
+		int alpha = Integer.MIN_VALUE + 1;
+		int beta = Integer.MAX_VALUE - 1;
+		
+	    PlateauFousFous tmpP = this.mPartie.copy();
+	    
+		String meilleurCoup = coupsPossibles.get(0);
+		coupsPossibles.remove(0);
+		tmpP.play(meilleurCoup, this.joueurMax);
+		
+		alpha = -this.negABEchecMem(this.profMax - 1, tmpP, -beta, -alpha, -1);
+		
+		for(String c : coupsPossibles){
+			tmpP = this.mPartie.copy();
+			tmpP.play(c, this.joueurMax);
+			int newVal = -this.negABEchecMem(this.profMax - 1, tmpP, -beta, -alpha, -1);
+			if(newVal > alpha){
+				meilleurCoup = c;
+				alpha = newVal;
+			}
+		}
+		this.mPartie.play(meilleurCoup, this.joueurMax);
+		System.out.println("A joué : " + meilleurCoup);
+		System.out.println(this.mPartie);
+		return meilleurCoup;
+		
 	}
 
 	public void declareLeVainqueur(int colour) {
 		// TODO Auto-generated method stub
-
+		if(colour == this.mColor){
+			System.out.println("Hasta la vista, baby");
+		}
 	}
 	
-	public int negABEchecMem(int prof, PlateauFousFous partie, int alpha, int beta, int parité){
+	private int negABEchecMem(int prof, PlateauFousFous partie, int alpha, int beta, int parité){
 		int max = 0;
 		
 		int alphaInit = alpha;
@@ -74,6 +114,20 @@ public class NegABEchecMemJoueur implements IJoueur {
 			}
 			//forall coupPossible et pas pigé :  s = succ(n, c) + meilleurCoup en 1er
 			
+			/** Faire le meilleur coup en 1er **/
+			for(String c : partie.mouvementsPossibles(joueur)){
+	    		PlateauFousFous tmp = partie.copy();
+	    		tmp.play(c, joueur);
+	    		max = Math.max(max, -this.negABEchecMem(prof - 1, tmp, -beta, -alpha, -parité));
+	    		if(max > alpha){
+	    			alpha = max;
+	    			meilleurCoup = c;
+	    		}
+	    		if(alpha >= beta){
+	    			break;
+	    		}
+			}
+			
 		}
 		if(entreeT == null){
 			entreeT = new InfosPlateau(); // vu que si le get depuis la hashMap ne donne rien faut bien creer une instance
@@ -96,7 +150,7 @@ public class NegABEchecMemJoueur implements IJoueur {
 
 	public void mouvementEnnemi(String coup) {
 		// TODO Auto-generated method stub
-
+		this.mPartie.play(coup, this.joueurMin);
 	}
 
 	public String binoName() {
