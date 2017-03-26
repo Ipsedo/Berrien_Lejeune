@@ -15,7 +15,7 @@ public class NegABEchecMemJoueur implements IJoueur {
 	private String joueurMin;
 	protected PlateauFousFous mPartie = new PlateauFousFous();
 	
-	private Heuristique h = HeuristiqueFousFous.ffH1;
+	private Heuristique h = HeuristiqueFousFous.ffH2;
 
 	public void initJoueur(int mycolour) {
 		// TODO Auto-generated method stub
@@ -47,8 +47,10 @@ public class NegABEchecMemJoueur implements IJoueur {
 			return "xxxxx";
 		}
 		
-		int alpha = Integer.MIN_VALUE + 1;
-		int beta = Integer.MAX_VALUE - 1;
+		/*int alpha = Integer.MIN_VALUE + 1;
+		int beta = Integer.MAX_VALUE - 1;*/
+		int alpha = 1;
+		int beta = 10;
 		
 	    PlateauFousFous tmpP = this.mPartie.copy();
 	    
@@ -112,16 +114,28 @@ public class NegABEchecMemJoueur implements IJoueur {
 		String meilleurCoup = "";
 		String joueur = parité > 0 ? this.joueurMax : this.joueurMin;
 		if(prof == 0 || partie.finDePartie()){
-			max = parité * h.computeHeuristique(joueur, partie);
+			return parité * h.computeHeuristique(joueur, partie); // return ou max <- heuristique ?
 		} else {
 			max = Integer.MIN_VALUE + 1;
+			ArrayList<String> coupsPossibleList = new ArrayList<String>(Arrays.asList(partie.mouvementsPossibles(joueur)));
+			//meilleurCoup = coupsPossibleList.get(0); // pour eviter de get -1 dan le if (sinon meilleurCoup peut rester "" et faire bug table transpo)
 			if(entreeT != null){
 				meilleurCoup = entreeT.getMeilleurCoup();
+				
+				/*System.out.println("meilleurCoup" + meilleurCoup);
+				for(String c : coupsPossibleList){
+					System.out.println(c);
+				}
+				int i = coupsPossibleList.indexOf(meilleurCoup);
+				String tmpCoup = coupsPossibleList.get(0);
+				coupsPossibleList.add(i, tmpCoup);
+				coupsPossibleList.add(0, meilleurCoup);*/
 			}
+			String[] coupsPossible = coupsPossibleList.toArray(new String[coupsPossibleList.size()]);
 			//forall coupPossible et pas pigé :  s = succ(n, c) + meilleurCoup en 1er
 			
 			/** Faire le meilleur coup en 1er **/
-			for(String c : partie.mouvementsPossibles(joueur)){
+			for(String c : coupsPossible){
 	    		PlateauFousFous tmp = partie.copy();
 	    		tmp.play(c, joueur);
 	    		max = Math.max(max, -this.negABEchecMem(prof - 1, tmp, -beta, -alpha, -parité));
@@ -133,12 +147,15 @@ public class NegABEchecMemJoueur implements IJoueur {
 	    			break;
 	    		}
 			}
-			
+			meilleurCoup = meilleurCoup == "" ? coupsPossibleList.get(0) : meilleurCoup;
 		}
 		if(entreeT == null){
 			entreeT = new InfosPlateau(); // vu que si le get depuis la hashMap ne donne rien faut bien creer une instance
 		}
 		entreeT.setVal(max);
+		if(meilleurCoup == ""){
+			System.out.println("gros buggg !!!");
+		}
 		entreeT.setMeilleurCoup(meilleurCoup);
 		
 		if(max <= alphaInit){

@@ -65,8 +65,8 @@ public class NegABEchecJoueur implements IJoueur {
 			return "xxxxx";
 		}
 		
-		int alpha = Integer.MIN_VALUE + 1;
-		int beta = Integer.MAX_VALUE - 1;
+		int alpha = 1;
+		int beta = 10;
 		
 	    PlateauFousFous tmpP = this.mPartie.copy();
 	    
