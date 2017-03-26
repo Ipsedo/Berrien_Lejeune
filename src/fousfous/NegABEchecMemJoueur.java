@@ -89,7 +89,7 @@ public class NegABEchecMemJoueur implements IJoueur {
 			entreeT.setFlag(InfosPlateau.Flag.EXACTVAL);
 		}
 		entreeT.setProf(prof);
-		this.transpoTable.put(partie.getPlateauHashCode(), entreeT);
+		this.transpoTable.put(partie.getPlateauHashCode(), entreeT); //besoin de remplacer l'ancienne valeur de entreeT si celle-ci pas null ? (ou bien elle est écrasée automatiquement ?)
 		
 		return max;
 	}

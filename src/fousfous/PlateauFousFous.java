@@ -488,7 +488,7 @@ public class PlateauFousFous implements Partie1 {
 		// Array.hashCode prend un tab d'objet (et non un double tab)
 		int[] res = new int[LIMIT * LIMIT];
 		for(int i = 0; i < LIMIT; i++){
-			for(int j = 0; j <LIMIT; j++){
+			for(int j = 0; j < LIMIT; j++){
 				res[i * j] = this.plateau[i][j];
 			}
 		}
