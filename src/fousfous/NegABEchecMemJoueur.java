@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class NegABEchecMemJoueur implements IJoueur {
 	
-	protected int profMax = 10;
+	protected int profMax = 6;
 	
 	private HashMap<Integer, InfosPlateau> transpoTable = new HashMap<Integer, InfosPlateau>();
 	
@@ -37,7 +37,8 @@ public class NegABEchecMemJoueur implements IJoueur {
 	public String choixMouvement() {
 		// TODO Auto-generated method stub
 		
-		/** pas du tout sûr -> à verifier (mais ça marche et ça va supersupersupzerrrrr viteeee !!!!! */
+		/** pas du tout sûr piur cette method -> à verifier */
+		
 		System.out.println("NegABEchecMem, profondeur max : " + this.profMax);
 		
 		ArrayList<String> coupsPossibles = new ArrayList<String>(Arrays.asList(this.mPartie.mouvementsPossibles(this.joueurMax)));
