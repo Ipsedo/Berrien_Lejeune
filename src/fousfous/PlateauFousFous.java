@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -484,7 +485,14 @@ public class PlateauFousFous implements Partie1 {
 	}
 	
 	public int getPlateauHashCode(){
-		return this.plateau.hashCode();
+		// Array.hashCode prend un tab d'objet (et non un double tab)
+		int[] res = new int[LIMIT * LIMIT];
+		for(int i = 0; i < LIMIT; i++){
+			for(int j = 0; j <LIMIT; j++){
+				res[i * j] = this.plateau[i][j];
+			}
+		}
+		return Arrays.hashCode(res);
 	}
 	
 	
