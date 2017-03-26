@@ -57,6 +57,8 @@ public class NegABEchecJoueur implements IJoueur {
 	}
 
 	public String choixMouvement() {
+		System.out.println("NegABEchec, profondeur max : " + this.profMax);
+		
 		ArrayList<String> coupsPossibles = new ArrayList<String>(Arrays.asList(this.mPartie.mouvementsPossibles(this.joueurMax)));
 		
 		if(coupsPossibles.isEmpty()){
