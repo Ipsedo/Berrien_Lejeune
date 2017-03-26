@@ -535,13 +535,20 @@ public class PlateauFousFous implements Partie1 {
 	
 	public int getPlateauHashCode(){
 		// Array.hashCode prend un tab d'objet (et non un double tab)
-		int[] res = new int[LIMIT * LIMIT];
+		/*int[] res = new int[LIMIT * LIMIT];
 		for(int i = 0; i < LIMIT; i++){
 			for(int j = 0; j < LIMIT; j++){
 				res[i * j] = this.plateau[i][j];
 			}
 		}
-		return Arrays.hashCode(res);
+		return Arrays.hashCode(res);*/
+		int res = 0;
+		for(int i = 0; i < LIMIT; i++){
+			for(int j = 0; j < LIMIT; j++){
+				res ^= (this.plateau[i][j] + 1) * i * j;
+			}
+		}
+		return res;
 	}
 	
 	
