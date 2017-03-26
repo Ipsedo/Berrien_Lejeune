@@ -206,7 +206,13 @@ public class TestsFousFous {
 		assertThat(p2.getPlateauHashCode(), not(p1.getPlateauHashCode()));
 		
 		p2.setFromFile("plateauTest1");
-		assertEquals(p1.getPlateauHashCode(), p2.getPlateauHashCode());		
+		assertEquals(p1.getPlateauHashCode(), p2.getPlateauHashCode());
+		
+		p1.setFromFile("plateau.txt");
+		p2.setFromFile("plateauTest11");
+		System.out.println(p2);
+		System.out.println(p1);
+		assertThat(p1.getPlateauHashCode(), not(p2.getPlateauHashCode()));
 	}
 
 }
