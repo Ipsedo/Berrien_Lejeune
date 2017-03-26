@@ -205,6 +205,8 @@ public class TestsFousFous {
 		p1.setFromFile("plateauTest1");
 		assertThat(p2.getPlateauHashCode(), not(p1.getPlateauHashCode()));
 		
+		p2.setFromFile("plateauTest1");
+		assertEquals(p1.getPlateauHashCode(), p2.getPlateauHashCode());		
 	}
 
 }
