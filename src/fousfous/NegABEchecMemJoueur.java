@@ -15,7 +15,7 @@ public class NegABEchecMemJoueur implements IJoueur {
 	private String joueurMin;
 	protected PlateauFousFous mPartie = new PlateauFousFous();
 	
-	private Heuristique h = HeuristiqueFousFous.ffH2;
+	private Heuristique h = HeuristiqueFousFous.ffH1;
 
 	public void initJoueur(int mycolour) {
 		// TODO Auto-generated method stub
@@ -50,7 +50,7 @@ public class NegABEchecMemJoueur implements IJoueur {
 		/*int alpha = Integer.MIN_VALUE + 1;
 		int beta = Integer.MAX_VALUE - 1;*/
 		int alpha = 1;
-		int beta = 10;
+		int beta = 3;
 		
 	    PlateauFousFous tmpP = this.mPartie.copy();
 	    
@@ -120,16 +120,16 @@ public class NegABEchecMemJoueur implements IJoueur {
 			ArrayList<String> coupsPossibleList = new ArrayList<String>(Arrays.asList(partie.mouvementsPossibles(joueur)));
 			//meilleurCoup = coupsPossibleList.get(0); // pour eviter de get -1 dan le if (sinon meilleurCoup peut rester "" et faire bug table transpo)
 			if(entreeT != null){
-				meilleurCoup = entreeT.getMeilleurCoup();
+				String tmp = entreeT.getMeilleurCoup();
 				
-				/*System.out.println("meilleurCoup" + meilleurCoup);
-				for(String c : coupsPossibleList){
-					System.out.println(c);
+				/** merdouille -> le meilleur coup est pas tj dans la liste, why ??? -> besoin du if mais deg niveau complexité... **/
+				if(coupsPossibleList.contains(tmp)){
+					meilleurCoup = tmp;
+					int i = coupsPossibleList.indexOf(meilleurCoup);
+					String tmpCoup = coupsPossibleList.get(0);
+					coupsPossibleList.add(i, tmpCoup);
+					coupsPossibleList.add(0, meilleurCoup);
 				}
-				int i = coupsPossibleList.indexOf(meilleurCoup);
-				String tmpCoup = coupsPossibleList.get(0);
-				coupsPossibleList.add(i, tmpCoup);
-				coupsPossibleList.add(0, meilleurCoup);*/
 			}
 			String[] coupsPossible = coupsPossibleList.toArray(new String[coupsPossibleList.size()]);
 			//forall coupPossible et pas pigé :  s = succ(n, c) + meilleurCoup en 1er
@@ -147,17 +147,14 @@ public class NegABEchecMemJoueur implements IJoueur {
 	    			break;
 	    		}
 			}
-			meilleurCoup = meilleurCoup == "" ? coupsPossibleList.get(0) : meilleurCoup;
+			meilleurCoup = meilleurCoup == "" ? coupsPossibleList.get(0) : meilleurCoup; // pour eviter de creer des infosPlateau avec meilleur coup null
 		}
+		
 		if(entreeT == null){
 			entreeT = new InfosPlateau(); // vu que si le get depuis la hashMap ne donne rien faut bien creer une instance
 		}
 		entreeT.setVal(max);
-		if(meilleurCoup == ""){
-			System.out.println("gros buggg !!!");
-		}
 		entreeT.setMeilleurCoup(meilleurCoup);
-		
 		if(max <= alphaInit){
 			entreeT.setFlag(InfosPlateau.Flag.BSUP);
 		} else if(max >= beta){
