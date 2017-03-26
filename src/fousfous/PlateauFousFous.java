@@ -81,10 +81,8 @@ public class PlateauFousFous implements Partie1 {
 			}
 			br.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -107,7 +105,6 @@ public class PlateauFousFous implements Partie1 {
 			}
 			bw.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -328,7 +325,6 @@ public class PlateauFousFous implements Partie1 {
 	}
 
 	public boolean estValide(String move, String player) {
-		// TODO Auto-generated method stub
 		Cell cFst = this.parseCell(move.split("-")[0]);
 		Cell cSnd = this.parseCell(move.split("-")[1]);
 		
@@ -356,7 +352,6 @@ public class PlateauFousFous implements Partie1 {
 	}
 
 	public String[] mouvementsPossibles(String player) {
-		// TODO Auto-generated method stub
 		ArrayList<String> tmpRes = new ArrayList<String>();
 		
 		for(int i = 0; i < LIMIT ; i++){
@@ -404,9 +399,6 @@ public class PlateauFousFous implements Partie1 {
 	}
 
 	public void play(String move, String player) {
-		// TODO Auto-generated method stub
-		//System.out.println(move);
-		//System.out.println(this);
 		if(!this.estValide(move, player)){
 			throw new RuntimeException("Coup invalide : " + move + ", pour joueur : " + player);
 		}
@@ -534,18 +526,11 @@ public class PlateauFousFous implements Partie1 {
 	}
 	
 	public int getPlateauHashCode(){
-		// Array.hashCode prend un tab d'objet (et non un double tab)
-		/*int[] res = new int[LIMIT * LIMIT];
-		for(int i = 0; i < LIMIT; i++){
-			for(int j = 0; j < LIMIT; j++){
-				res[i * j] = this.plateau[i][j];
-			}
-		}
-		return Arrays.hashCode(res);*/
 		int res = 0;
+		//TODO trouver vraie fonction de hash ..
 		for(int i = 0; i < LIMIT; i++){
 			for(int j = 0; j < LIMIT; j++){
-				res ^= (this.plateau[i][j] + 1) * i * j;
+				res ^= (this.plateau[i][j] + 2) * (i + 1 + LIMIT) * (j + 1);
 			}
 		}
 		return res;

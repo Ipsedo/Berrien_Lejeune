@@ -208,8 +208,7 @@ public class TestsFousFous {
 		p2.setFromFile("plateauTest1");
 		assertEquals(p1.getPlateauHashCode(), p2.getPlateauHashCode());
 		
-		p1 = new PlateauFousFous();
-		p2 = new PlateauFousFous();
+		p1.setFromFile("plateau.txt");
 		p2.setFromFile("plateauTest11");
 		//System.out.println(p1.getPlateauHashCode() + " " + p2.getPlateauHashCode());
 		assertThat(p1.getPlateauHashCode(), not(p2.getPlateauHashCode()));
