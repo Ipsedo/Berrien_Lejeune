@@ -526,14 +526,14 @@ public class PlateauFousFous implements Partie1 {
 	}
 	
 	public int getPlateauHashCode(){
-		int res = 0;
+		int[] res = new int[LIMIT * LIMIT];
 		//TODO trouver vraie fonction de hash ..
 		for(int i = 0; i < LIMIT; i++){
 			for(int j = 0; j < LIMIT; j++){
-				res ^= (this.plateau[i][j] + 2) * (i + 1 + LIMIT) * (j + 1);
+				res[i * LIMIT + j] = this.plateau[i][j];
 			}
 		}
-		return res;
+		return Arrays.hashCode(res);
 	}
 	
 	
