@@ -120,7 +120,7 @@ public class NegABEchecMemJoueur implements IJoueur {
 			ArrayList<String> coupsPossibleList = new ArrayList<String>(Arrays.asList(partie.mouvementsPossibles(joueur)));
 			//meilleurCoup = coupsPossibleList.get(0); // pour eviter de get -1 dan le if (sinon meilleurCoup peut rester "" et faire bug table transpo)
 			if(entreeT != null){
-				/*String tmp = entreeT.getMeilleurCoup();
+				String tmp = entreeT.getMeilleurCoup();
 				
 				// merdouille -> le meilleur coup est pas tj dans la liste, why ??? -> besoin du if mais deg niveau complexité... 
 				if(coupsPossibleList.contains(tmp)){
@@ -129,12 +129,12 @@ public class NegABEchecMemJoueur implements IJoueur {
 					String tmpCoup = coupsPossibleList.get(0);
 					coupsPossibleList.add(i, tmpCoup);
 					coupsPossibleList.add(0, meilleurCoup);
-				}*/
-				meilleurCoup = entreeT.getMeilleurCoup();
+				}
+				/*meilleurCoup = entreeT.getMeilleurCoup();
 				int i = coupsPossibleList.indexOf(meilleurCoup);
 				String tmpCoup = coupsPossibleList.get(0);
 				coupsPossibleList.add(i, tmpCoup);
-				coupsPossibleList.add(0, meilleurCoup);
+				coupsPossibleList.add(0, meilleurCoup);*/
 			}
 			String[] coupsPossible = coupsPossibleList.toArray(new String[coupsPossibleList.size()]);
 			//forall coupPossible et pas pigé :  s = succ(n, c) + meilleurCoup en 1er
