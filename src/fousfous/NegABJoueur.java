@@ -75,14 +75,14 @@ public class NegABJoueur implements IJoueur {
 		tmpP.play(meilleurCoup, this.joueurMax);
 		
 		System.out.println("-beta : " + (-beta) + " -alpha : " + (-alpha));
-		alpha = this.negAB(this.profMax - 1, tmpP, -beta, -alpha, -1);
+		alpha = this.negAB(this.profMax - 1, tmpP, -beta, -alpha, -1); // mettre un - ou pas ?
 		
 		System.out.println(alpha + " " + meilleurCoup);
 		
 		for(String c : coupsPossibles){
 			tmpP = this.mPartie.copy();
 			tmpP.play(c, this.joueurMax);
-			int newVal = this.negAB(this.profMax - 1, tmpP, -beta, -alpha, -1);
+			int newVal = this.negAB(this.profMax - 1, tmpP, -beta, -alpha, -1); // mettre un - ou pas ?
 			System.out.println(newVal);
 			if(newVal > alpha){
 				meilleurCoup = c;
