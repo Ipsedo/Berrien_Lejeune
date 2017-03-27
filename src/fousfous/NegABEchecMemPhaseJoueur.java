@@ -10,12 +10,12 @@ public class NegABEchecMemPhaseJoueur extends NegABEchecMemJoueur {
 				this.profMax = 7;
 				break;
 			case MILIEU:
-				super.h = HeuristiqueFousFous.ffH2;
-				this.profMax = 10;
+				super.h = HeuristiqueFousFous.ffH1;
+				this.profMax = 8;
 				break;
 			case FIN:
-				super.h = HeuristiqueFousFous.ffH3;
-				this.profMax = 14;
+				super.h = HeuristiqueFousFous.ffH1;
+				this.profMax = 9;
 				break;
 		}
 		

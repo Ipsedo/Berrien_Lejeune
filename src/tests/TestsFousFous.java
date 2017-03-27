@@ -1,7 +1,11 @@
 package tests;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,6 +13,8 @@ import java.util.List;
 import org.junit.Test;
 
 import fousfous.Cell;
+import fousfous.Heuristique;
+import fousfous.HeuristiqueFousFous;
 import fousfous.PlateauFousFous;
 
 public class TestsFousFous {
@@ -150,6 +156,10 @@ public class TestsFousFous {
 		String move10 = "D5-F7";
 		assertFalse(p5.estValide(move10, PlateauFousFous.JBLANC));
 		
+		PlateauFousFous p6 = new PlateauFousFous();
+		String move11 = "H5-G4";
+		assertTrue(p6.estValide(move11, PlateauFousFous.JBLANC));
+		
 	}
 	
 	@Test
@@ -189,6 +199,31 @@ public class TestsFousFous {
 		PlateauFousFous p3 = new PlateauFousFous();
 		p3.setFromFile("plateauTest1");
 		assertFalse(p3.finDePartie());
+	}
+	
+	@Test
+	public void testGetNbPionCamp(){
+		PlateauFousFous p = new PlateauFousFous();
+		
+		assertEquals(p.getNbBlanc(), 16);
+		assertEquals(p.getNbNoir(), 16);
+		
+
+		p.setFromFile("plateauTest11");
+		assertEquals(p.getNbBlanc(), 16);
+		assertEquals(p.getNbNoir(), 15);
+	}
+	
+	@Test
+	public void testHeuristique(){
+		PlateauFousFous p = new PlateauFousFous();
+		Heuristique ff1 = HeuristiqueFousFous.ffH1;
+		assertEquals(ff1.computeHeuristique(PlateauFousFous.JBLANC, p), 0);
+		assertEquals(ff1.computeHeuristique(PlateauFousFous.JNOIR, p), 0);
+		
+		p.setFromFile("plateauTest11");
+		assertEquals(ff1.computeHeuristique(PlateauFousFous.JBLANC, p), 1);
+		assertEquals(ff1.computeHeuristique(PlateauFousFous.JNOIR, p), -1);
 	}
 	
 	@Test

@@ -509,6 +509,50 @@ public class PlateauFousFous implements Partie1 {
 		return res;
 	}
 	
+	public int getNbDefense(String joueur){
+		int res = 0;
+		int mColor = joueur == PlateauFousFous.JBLANC ? 1 : -1;
+		for(int i = 0; i < LIMIT; i++){
+			for(int j = 0; j < LIMIT; j++){
+				if(this.plateau[i][j] == mColor){
+					for(int k = i + 1, l = j + 1; k < LIMIT && l < LIMIT; k++, l++){
+						if(this.plateau[k][l] == mColor){
+							res++;
+							break;
+						} else if(this.plateau[k][l] == -mColor){
+							break;
+						}
+					}
+					for(int k = i - 1, l = j + 1; k >= 0 && l < LIMIT; k--, l++){
+						if(this.plateau[k][l] == mColor){
+							res++;
+							break;
+						} else if(this.plateau[k][l] == -mColor){
+							break;
+						}
+					}
+					for(int k = i + 1, l = j - 1; k < LIMIT && l >= 0; k++, l--){
+						if(this.plateau[k][l] == mColor){
+							res++;
+							break;
+						} else if(this.plateau[k][l] == -mColor){
+							break;
+						}
+					}
+					for(int k = i - 1, l = j - 1; k >= 0 && l >= 0; k--, l--){
+						if(this.plateau[k][l] == mColor){
+							res++;
+							break;
+						} else if(this.plateau[k][l] == -mColor){
+							break;
+						}
+					}
+				}
+			}
+		}
+		return res;
+	}
+	
 	public PlateauFousFous copy(){
 		return new PlateauFousFous(this.plateau);
 	}
