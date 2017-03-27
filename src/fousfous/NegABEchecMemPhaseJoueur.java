@@ -6,11 +6,11 @@ public class NegABEchecMemPhaseJoueur extends NegABEchecMemJoueur {
 		// TODO Auto-generated method stub
 		switch(super.mPartie.getGamePhase()){
 			case DEBUT:
-				super.h = HeuristiqueFousFous.ffH1;
+				super.h = HeuristiqueFousFous.ffH3;
 				this.profMax = 7;
 				break;
 			case MILIEU:
-				super.h = HeuristiqueFousFous.ffH1;
+				super.h = HeuristiqueFousFous.ffH4;
 				this.profMax = 8;
 				break;
 			case FIN:
