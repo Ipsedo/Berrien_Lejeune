@@ -40,7 +40,7 @@ public class NegABEchecJoueur implements IJoueur {
 		String joueur = parité > 0 ? this.joueurMax : this.joueurMin;
 		int max;
 		if(pronf <= 0 || partie.finDePartie()){
-			max = parité * this.h.computeHeuristique(joueur, partie);
+			max = parité * this.h.computeHeuristique(this.joueurMax, partie);
 		}else{
 			max = Integer.MIN_VALUE + 1;
 			for(String c : partie.mouvementsPossibles(joueur)){

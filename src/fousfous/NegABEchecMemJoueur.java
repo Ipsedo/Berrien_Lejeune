@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class NegABEchecMemJoueur implements IJoueur {
 	
-	protected int profMax = 7;
+	protected int profMax = 6;
 	
 	private HashMap<Integer, InfosPlateau> transpoTable = new HashMap<Integer, InfosPlateau>();
 	
@@ -15,7 +15,7 @@ public class NegABEchecMemJoueur implements IJoueur {
 	private String joueurMin;
 	protected PlateauFousFous mPartie = new PlateauFousFous();
 	
-	protected Heuristique h = HeuristiqueFousFous.ffH1;
+	protected Heuristique h = HeuristiqueFousFous.ffH1prime;
 
 	public void initJoueur(int mycolour) {
 		// TODO Auto-generated method stub
@@ -114,7 +114,7 @@ public class NegABEchecMemJoueur implements IJoueur {
 		String meilleurCoup = "";
 		String joueur = parité > 0 ? this.joueurMax : this.joueurMin;
 		if(prof == 0 || partie.finDePartie()){
-			return parité * h.computeHeuristique(joueur, partie); // return ou max <- heuristique ?
+			return parité * h.computeHeuristique(this.joueurMax, partie); // return ou max <- heuristique ?
 		} else {
 			max = Integer.MIN_VALUE + 1;
 			ArrayList<String> coupsPossibleList = new ArrayList<String>(Arrays.asList(partie.mouvementsPossibles(joueur)));

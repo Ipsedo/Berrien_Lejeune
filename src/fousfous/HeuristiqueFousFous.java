@@ -12,7 +12,6 @@ public class HeuristiqueFousFous {
 				return plateau.getNbNoir() - plateau.getNbBlanc();
 			}
 		}
-		
 	};
 	
 	public static Heuristique ffH1bis = new Heuristique(){
@@ -23,6 +22,19 @@ public class HeuristiqueFousFous {
 				return plateau.getNbBlanc() - plateau.getNbNoir() * 2;
 			} else {
 				return plateau.getNbNoir() - plateau.getNbBlanc() * 2;
+			}
+		}
+		
+	};
+	
+	public static Heuristique ffH1prime = new Heuristique(){
+
+		public int computeHeuristique(String joueur, Partie1 partie) {
+			PlateauFousFous plateau = (PlateauFousFous) partie;
+			if(joueur == PlateauFousFous.JBLANC){
+				return (int) (Math.pow(plateau.getNbBlanc() - plateau.getNbNoir(), 3d));
+			} else {
+				return (int) (Math.pow(plateau.getNbNoir() - plateau.getNbBlanc(), 3d));
 			}
 		}
 		

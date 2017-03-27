@@ -12,7 +12,7 @@ public class NegABJoueur implements IJoueur {
 	private String joueurMin;
 	protected PlateauFousFous mPartie = new PlateauFousFous();
 	
-	protected Heuristique h = HeuristiqueFousFous.ffH1;
+	protected Heuristique h = HeuristiqueFousFous.ffH1prime;
 
 	public void initJoueur(int mycolour) {
 		// TODO Auto-generated method stub
@@ -34,13 +34,11 @@ public class NegABJoueur implements IJoueur {
 	private int negAB(int pronf, PlateauFousFous partie, int alpha, int beta, int parité){
 		String joueur = parité > 0 ? this.joueurMax : this.joueurMin;
 		if(pronf <= 0 || partie.finDePartie()){
-			return parité * this.h.computeHeuristique(joueur, partie);
+			return parité * this.h.computeHeuristique(this.joueurMax, partie);
 		}else{
 			for(String c : partie.mouvementsPossibles(joueur)){
 	    		PlateauFousFous tmp = partie.copy();
 	    		tmp.play(c, joueur);
-	    		int tmpA = -negAB(pronf - 1, tmp, -beta, -alpha, -parité);
-	    		System.out.println(tmpA + " " + pronf);
 	    		alpha = Math.max(alpha, -negAB(pronf - 1, tmp, -beta, -alpha, -parité));
 	    		if(alpha >= beta){
 	    			return beta;
@@ -74,20 +72,15 @@ public class NegABJoueur implements IJoueur {
 		coupsPossibles.remove(0);
 		tmpP.play(meilleurCoup, this.joueurMax);
 		
-		System.out.println("-beta : " + (-beta) + " -alpha : " + (-alpha));
-		alpha = this.negAB(this.profMax - 1, tmpP, -beta, -alpha, -1); // mettre un - ou pas ?
-		
-		System.out.println(alpha + " " + meilleurCoup);
+		alpha = -this.negAB(this.profMax - 1, tmpP, -beta, -alpha, -1);
 		
 		for(String c : coupsPossibles){
 			tmpP = this.mPartie.copy();
 			tmpP.play(c, this.joueurMax);
-			int newVal = this.negAB(this.profMax - 1, tmpP, -beta, -alpha, -1); // mettre un - ou pas ?
-			System.out.println(newVal);
+			int newVal = -this.negAB(this.profMax - 1, tmpP, -beta, -alpha, -1);
 			if(newVal > alpha){
 				meilleurCoup = c;
 				alpha = newVal;
-				System.out.println(alpha + " " + meilleurCoup);
 			}
 		}
 		this.mPartie.play(meilleurCoup, this.joueurMax);

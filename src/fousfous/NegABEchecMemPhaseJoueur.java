@@ -7,15 +7,15 @@ public class NegABEchecMemPhaseJoueur extends NegABEchecMemJoueur {
 		switch(super.mPartie.getGamePhase()){
 			case DEBUT:
 				super.h = HeuristiqueFousFous.ffH3;
-				this.profMax = 7;
+				this.profMax = 5;
 				break;
 			case MILIEU:
 				super.h = HeuristiqueFousFous.ffH4;
-				this.profMax = 8;
+				this.profMax = 6;
 				break;
 			case FIN:
 				super.h = HeuristiqueFousFous.ffH1bis;
-				this.profMax = 9;
+				this.profMax = 7;
 				break;
 		}
 		

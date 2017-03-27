@@ -236,6 +236,10 @@ public class TestsFousFous {
 		p.setFromFile("plateauTest14");
 		assertEquals(ff1.computeHeuristique(PlateauFousFous.JBLANC, p), 1);
 		assertEquals(ff1.computeHeuristique(PlateauFousFous.JNOIR, p), -1);
+		
+		p.setFromFile("plateauTest15");
+		p.play("A4-B3", PlateauFousFous.JBLANC);
+		assertTrue(ff1.computeHeuristique(PlateauFousFous.JBLANC, p) > 0);
 	}
 	
 	@Test
