@@ -224,6 +224,18 @@ public class TestsFousFous {
 		p.setFromFile("plateauTest11");
 		assertEquals(ff1.computeHeuristique(PlateauFousFous.JBLANC, p), 1);
 		assertEquals(ff1.computeHeuristique(PlateauFousFous.JNOIR, p), -1);
+		
+		p.setFromFile("plateauTest12");
+		assertEquals(ff1.computeHeuristique(PlateauFousFous.JBLANC, p), 1);
+		assertEquals(ff1.computeHeuristique(PlateauFousFous.JNOIR, p), -1);
+		
+		p.setFromFile("plateauTest13");
+		assertEquals(ff1.computeHeuristique(PlateauFousFous.JBLANC, p), 2);
+		assertEquals(ff1.computeHeuristique(PlateauFousFous.JNOIR, p), -2);
+		
+		p.setFromFile("plateauTest14");
+		assertEquals(ff1.computeHeuristique(PlateauFousFous.JBLANC, p), 1);
+		assertEquals(ff1.computeHeuristique(PlateauFousFous.JNOIR, p), -1);
 	}
 	
 	@Test

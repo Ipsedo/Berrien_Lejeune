@@ -15,6 +15,19 @@ public class HeuristiqueFousFous {
 		
 	};
 	
+	public static Heuristique ffH1bis = new Heuristique(){
+
+		public int computeHeuristique(String joueur, Partie1 partie) {
+			PlateauFousFous plateau = (PlateauFousFous) partie;
+			if(joueur == PlateauFousFous.JBLANC){
+				return plateau.getNbBlanc() - plateau.getNbNoir() * 2;
+			} else {
+				return plateau.getNbNoir() - plateau.getNbBlanc() * 2;
+			}
+		}
+		
+	};
+	
 	public static Heuristique ffH2 = new Heuristique(){
 
 		public int computeHeuristique(String joueur, Partie1 partie) {
@@ -50,9 +63,9 @@ public class HeuristiqueFousFous {
 		public int computeHeuristique(String joueur, Partie1 partie) {
 			PlateauFousFous plateau = (PlateauFousFous) partie;
 			if(joueur == PlateauFousFous.JBLANC){
-				return (plateau.getNbBlanc() - plateau.getNbNoir() * 2) + plateau.getNbDefense(PlateauFousFous.JBLANC) - plateau.getNbDefense(PlateauFousFous.JNOIR);
+				return (plateau.getNbBlanc() - plateau.getNbNoir() * 2) * 2 + plateau.getNbDefense(PlateauFousFous.JBLANC) - plateau.getNbDefense(PlateauFousFous.JNOIR);
 			} else {
-				return (plateau.getNbNoir() - plateau.getNbBlanc() * 2) + plateau.getNbDefense(PlateauFousFous.JNOIR) - plateau.getNbDefense(PlateauFousFous.JBLANC);
+				return (plateau.getNbNoir() - plateau.getNbBlanc() * 2) * 2 + plateau.getNbDefense(PlateauFousFous.JNOIR) - plateau.getNbDefense(PlateauFousFous.JBLANC);
 			}
 		}
 		

@@ -14,7 +14,7 @@ public class NegABPhaseJoueur extends NegABJoueur {
 				this.profMax = 4;
 				break;
 			case FIN:
-				super.h = HeuristiqueFousFous.ffH1;
+				super.h = HeuristiqueFousFous.ffH4;
 				this.profMax = 4;
 				break;
 		}

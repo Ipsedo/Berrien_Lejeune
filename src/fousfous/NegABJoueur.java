@@ -40,7 +40,8 @@ public class NegABJoueur implements IJoueur {
 	    		PlateauFousFous tmp = partie.copy();
 	    		tmp.play(c, joueur);
 	    		int tmpA = -negAB(pronf - 1, tmp, -beta, -alpha, -parité);
-	    		alpha = Math.max(alpha, tmpA);
+	    		System.out.println(tmpA + " " + pronf);
+	    		alpha = Math.max(alpha, -negAB(pronf - 1, tmp, -beta, -alpha, -parité));
 	    		if(alpha >= beta){
 	    			return beta;
 	    		}
@@ -55,6 +56,11 @@ public class NegABJoueur implements IJoueur {
 		
 		ArrayList<String> coupsPossibles = new ArrayList<String>(Arrays.asList(this.mPartie.mouvementsPossibles(this.joueurMax)));
 		
+		for(String s : coupsPossibles){
+			System.out.print(s + " ");
+		}
+		System.out.print("\n");
+		
 		if(coupsPossibles.isEmpty()){
 			return "xxxxx";
 		}
@@ -68,15 +74,20 @@ public class NegABJoueur implements IJoueur {
 		coupsPossibles.remove(0);
 		tmpP.play(meilleurCoup, this.joueurMax);
 		
-		alpha = -this.negAB(this.profMax - 1, tmpP, -beta, -alpha, -1);
+		System.out.println("-beta : " + (-beta) + " -alpha : " + (-alpha));
+		alpha = this.negAB(this.profMax - 1, tmpP, -beta, -alpha, -1);
+		
+		System.out.println(alpha + " " + meilleurCoup);
 		
 		for(String c : coupsPossibles){
 			tmpP = this.mPartie.copy();
 			tmpP.play(c, this.joueurMax);
-			int newVal = -this.negAB(this.profMax - 1, tmpP, -beta, -alpha, -1);
+			int newVal = this.negAB(this.profMax - 1, tmpP, -beta, -alpha, -1);
+			System.out.println(newVal);
 			if(newVal > alpha){
 				meilleurCoup = c;
 				alpha = newVal;
+				System.out.println(alpha + " " + meilleurCoup);
 			}
 		}
 		this.mPartie.play(meilleurCoup, this.joueurMax);
