@@ -15,7 +15,7 @@ public class NegABEchecMemJoueur implements IJoueur {
 	private String joueurMin;
 	protected PlateauFousFous mPartie = new PlateauFousFous();
 	
-	private Heuristique h = HeuristiqueFousFous.ffH1;
+	protected Heuristique h = HeuristiqueFousFous.ffH1;
 
 	public void initJoueur(int mycolour) {
 		// TODO Auto-generated method stub
@@ -49,8 +49,8 @@ public class NegABEchecMemJoueur implements IJoueur {
 		
 		/*int alpha = Integer.MIN_VALUE + 1;
 		int beta = Integer.MAX_VALUE - 1;*/
-		int alpha = 1;
-		int beta = 3;
+		int alpha = 0;
+		int beta = 10;
 		
 	    PlateauFousFous tmpP = this.mPartie.copy();
 	    
