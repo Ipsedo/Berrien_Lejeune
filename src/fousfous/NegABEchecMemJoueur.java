@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class NegABEchecMemJoueur implements IJoueur {
 	
-	protected int profMax = 6;
+	protected int profMax = 7;
 	
 	private HashMap<Integer, InfosPlateau> transpoTable = new HashMap<Integer, InfosPlateau>();
 	
