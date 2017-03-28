@@ -49,8 +49,8 @@ public class NegABEchecMemJoueur implements IJoueur {
 		
 		/*int alpha = Integer.MIN_VALUE + 1;
 		int beta = Integer.MAX_VALUE - 1;*/
-		int alpha = 1;
-		int beta = 100;
+		int alpha = -50;
+		int beta = 50;
 		
 	    PlateauFousFous tmpP = this.mPartie.copy();
 	    
@@ -102,9 +102,8 @@ public class NegABEchecMemJoueur implements IJoueur {
 			entreeT = this.transpoTable.get(partie);
 		}
 		
-		if(entreeT != null && entreeT.getProf() >= prof){ // >= prof ou <= prof vu que notre prof est decrementale
+		if(entreeT != null && entreeT.getProf() >= prof){
 			switch(entreeT.getFlag()){
-				// verifier que le switch va bien direct dans la bonne case et passe pas par les autres -> deja eu un bug comme ça
 				case BINF:
 					alpha = Math.max(alpha, entreeT.getVal());
 					break;
@@ -123,23 +122,7 @@ public class NegABEchecMemJoueur implements IJoueur {
 			return parité * h.computeHeuristique(this.joueurMax, partie); // return ou max <- heuristique ?
 		} else {
 			max = Integer.MIN_VALUE + 1;
-			//meilleurCoup = coupsPossibleList.get(0); // pour eviter de get -1 dan le if (sinon meilleurCoup peut rester "" et faire bug table transpo)
 			if(entreeT != null){
-				/*String tmp = entreeT.getMeilleurCoup();
-				
-				// merdouille -> le meilleur coup est pas tj dans la liste, why ??? -> besoin du if mais deg niveau complexité... 
-				if(coupsPossibleList.contains(tmp)){
-					meilleurCoup = tmp;
-					int i = coupsPossibleList.indexOf(meilleurCoup);
-					String tmpCoup = coupsPossibleList.get(0);
-					coupsPossibleList.add(i, tmpCoup);
-					coupsPossibleList.add(0, meilleurCoup);
-					//System.out.println("coup dans list");
-				} else {
-					System.out.println("coup pas dans list " + tmp);
-					//coupsPossibleList.forEach(s -> System.out.print(s + " "));
-					//System.out.print("\n");
-				}*/
 				meilleurCoup = entreeT.getMeilleurCoup();
 				int i = coupsPossibleList.indexOf(meilleurCoup);
 				String tmpCoup = coupsPossibleList.get(0);
@@ -159,10 +142,13 @@ public class NegABEchecMemJoueur implements IJoueur {
 	    			meilleurCoup = c;
 	    		}
 	    		if(alpha >= beta){
+	    			meilleurCoup = c;
 	    			break;
 	    		}
 			}
+			//System.out.println("meilleur coup avant " + meilleurCoup);
 			meilleurCoup = meilleurCoup.isEmpty() ? coupsPossibleList.get(0) : meilleurCoup; // pour eviter de creer des infosPlateau avec meilleur coup null
+			//System.out.println("meilleur coup après " + meilleurCoup);
 		}
 		
 		if(entreeT == null){
