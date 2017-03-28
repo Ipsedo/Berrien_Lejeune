@@ -6,16 +6,16 @@ public class NegABPhaseJoueur extends NegABJoueur {
 		// TODO Auto-generated method stub
 		switch(super.mPartie.getGamePhase()){
 			case DEBUT:
-				super.h = HeuristiqueFousFous.ffH3;
-				this.profMax = 4;
+				super.h = HeuristiqueFousFous.ffH1prime;
+				this.profMax = 6;
 				break;
 			case MILIEU:
-				super.h = HeuristiqueFousFous.ffH4;
-				this.profMax = 4;
+				super.h = HeuristiqueFousFous.ffH1prime;
+				this.profMax = 7;
 				break;
 			case FIN:
-				super.h = HeuristiqueFousFous.ffH4;
-				this.profMax = 4;
+				super.h = HeuristiqueFousFous.ffH1prime;
+				this.profMax = 10;
 				break;
 		}
 		

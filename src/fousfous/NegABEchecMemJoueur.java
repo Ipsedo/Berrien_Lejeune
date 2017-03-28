@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class NegABEchecMemJoueur implements IJoueur {
 	
-	protected int profMax = 6;
+	protected int profMax = 8;
 	
 	private HashMap<Integer, InfosPlateau> transpoTable = new HashMap<Integer, InfosPlateau>();
 	
@@ -15,7 +15,7 @@ public class NegABEchecMemJoueur implements IJoueur {
 	private String joueurMin;
 	protected PlateauFousFous mPartie = new PlateauFousFous();
 	
-	protected Heuristique h = HeuristiqueFousFous.ffH1prime;
+	protected Heuristique h = HeuristiqueFousFous.ffH1;
 
 	public void initJoueur(int mycolour) {
 		// TODO Auto-generated method stub
@@ -47,10 +47,10 @@ public class NegABEchecMemJoueur implements IJoueur {
 			return "xxxxx";
 		}
 		
-		/*int alpha = Integer.MIN_VALUE + 1;
-		int beta = Integer.MAX_VALUE - 1;*/
-		int alpha = 0;
-		int beta = 10;
+		int alpha = Integer.MIN_VALUE + 1;
+		int beta = Integer.MAX_VALUE - 1;
+		/*int alpha = 1;
+		int beta = 10;*/
 		
 	    PlateauFousFous tmpP = this.mPartie.copy();
 	    
@@ -129,7 +129,12 @@ public class NegABEchecMemJoueur implements IJoueur {
 					String tmpCoup = coupsPossibleList.get(0);
 					coupsPossibleList.add(i, tmpCoup);
 					coupsPossibleList.add(0, meilleurCoup);
-				}
+					//System.out.println("coup dans list");
+				} /*else {
+					System.out.println("coup pas dans list " + tmp);
+					coupsPossibleList.forEach(s -> System.out.print(s + " "));
+					System.out.print("\n");
+				}*/
 				/*meilleurCoup = entreeT.getMeilleurCoup();
 				int i = coupsPossibleList.indexOf(meilleurCoup);
 				String tmpCoup = coupsPossibleList.get(0);
@@ -152,7 +157,7 @@ public class NegABEchecMemJoueur implements IJoueur {
 	    			break;
 	    		}
 			}
-			meilleurCoup = meilleurCoup == "" ? coupsPossibleList.get(0) : meilleurCoup; // pour eviter de creer des infosPlateau avec meilleur coup null
+			meilleurCoup = meilleurCoup.isEmpty() ? coupsPossibleList.get(0) : meilleurCoup; // pour eviter de creer des infosPlateau avec meilleur coup null
 		}
 		
 		if(entreeT == null){
