@@ -47,10 +47,10 @@ public class NegABEchecMemJoueur implements IJoueur {
 			return "xxxxx";
 		}
 		
-		int alpha = Integer.MIN_VALUE + 1;
-		int beta = Integer.MAX_VALUE - 1;
-		/*int alpha = 1;
-		int beta = 10;*/
+		/*int alpha = Integer.MIN_VALUE + 1;
+		int beta = Integer.MAX_VALUE - 1;*/
+		int alpha = 1;
+		int beta = 100;
 		
 	    PlateauFousFous tmpP = this.mPartie.copy();
 	    
@@ -70,9 +70,9 @@ public class NegABEchecMemJoueur implements IJoueur {
 				meilleurCoup = c;
 				alpha = max;
 			}
-			if(alpha >= beta){
+			/*if(alpha >= beta){
 				break;
-			}
+			}*/
 		}
 		this.mPartie.play(meilleurCoup, this.joueurMax);
 		System.out.println("A joué : " + meilleurCoup);
