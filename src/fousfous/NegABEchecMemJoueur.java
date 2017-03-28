@@ -6,16 +6,16 @@ import java.util.HashMap;
 
 public class NegABEchecMemJoueur implements IJoueur {
 	
-	protected int profMax = 8;
+	protected int profMax = 6;
 	
-	private HashMap<Integer, InfosPlateau> transpoTable = new HashMap<Integer, InfosPlateau>();
+	private HashMap<PlateauFousFous, InfosPlateau> transpoTable = new HashMap<PlateauFousFous, InfosPlateau>();
 	
 	private int mColor;
 	private String joueurMax;
 	private String joueurMin;
 	protected PlateauFousFous mPartie = new PlateauFousFous();
 	
-	protected Heuristique h = HeuristiqueFousFous.ffH1;
+	protected Heuristique h = HeuristiqueFousFous.ffH1prime;
 
 	public void initJoueur(int mycolour) {
 		// TODO Auto-generated method stub
@@ -93,7 +93,14 @@ public class NegABEchecMemJoueur implements IJoueur {
 		
 		int alphaInit = alpha;
 		
-		InfosPlateau entreeT = this.transpoTable.get(partie.getPlateauHashCode());
+		String meilleurCoup = "";
+		String joueur = parité > 0 ? this.joueurMax : this.joueurMin;
+		ArrayList<String> coupsPossibleList = new ArrayList<String>(Arrays.asList(partie.mouvementsPossibles(joueur)));
+		
+		InfosPlateau entreeT = null;
+		if(this.transpoTable.containsKey(partie) && coupsPossibleList.contains(this.transpoTable.get(partie).getMeilleurCoup())){
+			entreeT = this.transpoTable.get(partie);
+		}
 		
 		if(entreeT != null && entreeT.getProf() >= prof){ // >= prof ou <= prof vu que notre prof est decrementale
 			switch(entreeT.getFlag()){
@@ -111,16 +118,14 @@ public class NegABEchecMemJoueur implements IJoueur {
 				return entreeT.getVal();
 			}
 		}
-		String meilleurCoup = "";
-		String joueur = parité > 0 ? this.joueurMax : this.joueurMin;
+		
 		if(prof == 0 || partie.finDePartie()){
 			return parité * h.computeHeuristique(this.joueurMax, partie); // return ou max <- heuristique ?
 		} else {
 			max = Integer.MIN_VALUE + 1;
-			ArrayList<String> coupsPossibleList = new ArrayList<String>(Arrays.asList(partie.mouvementsPossibles(joueur)));
 			//meilleurCoup = coupsPossibleList.get(0); // pour eviter de get -1 dan le if (sinon meilleurCoup peut rester "" et faire bug table transpo)
 			if(entreeT != null){
-				String tmp = entreeT.getMeilleurCoup();
+				/*String tmp = entreeT.getMeilleurCoup();
 				
 				// merdouille -> le meilleur coup est pas tj dans la liste, why ??? -> besoin du if mais deg niveau complexité... 
 				if(coupsPossibleList.contains(tmp)){
@@ -130,16 +135,16 @@ public class NegABEchecMemJoueur implements IJoueur {
 					coupsPossibleList.add(i, tmpCoup);
 					coupsPossibleList.add(0, meilleurCoup);
 					//System.out.println("coup dans list");
-				} /*else {
+				} else {
 					System.out.println("coup pas dans list " + tmp);
-					coupsPossibleList.forEach(s -> System.out.print(s + " "));
-					System.out.print("\n");
+					//coupsPossibleList.forEach(s -> System.out.print(s + " "));
+					//System.out.print("\n");
 				}*/
-				/*meilleurCoup = entreeT.getMeilleurCoup();
+				meilleurCoup = entreeT.getMeilleurCoup();
 				int i = coupsPossibleList.indexOf(meilleurCoup);
 				String tmpCoup = coupsPossibleList.get(0);
 				coupsPossibleList.add(i, tmpCoup);
-				coupsPossibleList.add(0, meilleurCoup);*/
+				coupsPossibleList.add(0, meilleurCoup);
 			}
 			String[] coupsPossible = coupsPossibleList.toArray(new String[coupsPossibleList.size()]);
 			//forall coupPossible et pas pigé :  s = succ(n, c) + meilleurCoup en 1er
@@ -173,7 +178,7 @@ public class NegABEchecMemJoueur implements IJoueur {
 			entreeT.setFlag(InfosPlateau.Flag.EXACTVAL);
 		}
 		entreeT.setProf(prof);
-		this.transpoTable.put(partie.getPlateauHashCode(), entreeT); //besoin de remplacer l'ancienne valeur de entreeT si celle-ci pas null ? (ou bien elle est écrasée automatiquement ?)
+		this.transpoTable.put(partie, entreeT); //besoin de remplacer l'ancienne valeur de entreeT si celle-ci pas null ? (ou bien elle est écrasée automatiquement ?)
 		
 		return max;
 	}

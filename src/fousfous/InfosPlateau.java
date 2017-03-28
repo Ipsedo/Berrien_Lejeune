@@ -18,8 +18,7 @@ public class InfosPlateau {
 		
 	}
 	
-	public InfosPlateau(String joueurCourant, int prof, Flag flag, int val, String meilleurCoup){
-		this.joueurCourant = joueurCourant;
+	public InfosPlateau(int prof, Flag flag, int val, String meilleurCoup){
 		this.prof = prof;
 		this.mFlag = flag;
 		this.val = val;
@@ -42,8 +41,8 @@ public class InfosPlateau {
 		return this.prof;
 	}
 	
-	public void setFlag(Flag nFlag){
-		this.mFlag = nFlag;
+	public void setFlag(Flag flag){
+		this.mFlag = flag;
 	}
 	
 	public void setVal(int val){

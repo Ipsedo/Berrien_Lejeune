@@ -248,21 +248,20 @@ public class TestsFousFous {
 		
 		PlateauFousFous p1 = new PlateauFousFous();
 		PlateauFousFous p2 = new PlateauFousFous();
-		assertEquals(p1.getPlateauHashCode(), p2.getPlateauHashCode());
+		assertEquals(p1.hashCode(), p2.hashCode());
 		
 		p1.setFromFile("plateau.txt");
-		assertEquals(p1.getPlateauHashCode(), p2.getPlateauHashCode());
+		assertEquals(p1.hashCode(), p2.hashCode());
 		
 		p1.setFromFile("plateauTest1");
-		assertThat(p2.getPlateauHashCode(), not(p1.getPlateauHashCode()));
+		assertThat(p2.hashCode(), not(p1.hashCode()));
 		
 		p2.setFromFile("plateauTest1");
-		assertEquals(p1.getPlateauHashCode(), p2.getPlateauHashCode());
+		assertEquals(p1.hashCode(), p2.hashCode());
 		
 		p1.setFromFile("plateau.txt");
 		p2.setFromFile("plateauTest11");
-		//System.out.println(p1.getPlateauHashCode() + " " + p2.getPlateauHashCode());
-		assertThat(p1.getPlateauHashCode(), not(p2.getPlateauHashCode()));
+		assertThat(p1.hashCode(), not(p2.hashCode()));
 	}
 
 }

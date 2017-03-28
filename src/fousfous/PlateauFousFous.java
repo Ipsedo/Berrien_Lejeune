@@ -444,6 +444,22 @@ public class PlateauFousFous implements Partie1 {
 		return res;
 	}
 	
+	public String toStringLite(){
+		String res = "";
+		for(int i = 0; i < LIMIT; i ++){
+			for(int j = 0; j < LIMIT; j++){
+				if(this.plateau[i][j] == VIDE){
+					res += "-";
+				} else if(this.plateau[i][j] == BLANC){
+					res += "b";
+				} else if(this.plateau[i][j] == NOIR){
+					res += "n";
+				}
+			}
+		}
+		return res;
+	}
+	
 	public int getNbBlanc(){
 		int sum = 0;
 		for(int[] line : this.plateau){
@@ -569,7 +585,8 @@ public class PlateauFousFous implements Partie1 {
 		}
 	}
 	
-	public int getPlateauHashCode(){
+	@Override
+	public int hashCode(){
 		int[] res = new int[LIMIT * LIMIT];
 		//TODO trouver vraie fonction de hash ..
 		for(int i = 0; i < LIMIT; i++){
