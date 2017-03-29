@@ -46,11 +46,11 @@ public class HeuristiqueFousFous {
 			PlateauFousFous plateau = (PlateauFousFous) partie;
 			if(joueur == PlateauFousFous.JBLANC){
 				//return 16 - plateau.getNbNoir();// + plateau.getNbMenaces(PlateauFousFous.JBLANC);
-				return (16 - plateau.getNbNoir() - (16 - plateau.getNbBlanc())) * 10 + (plateau.getNbMenaces(PlateauFousFous.JBLANC) - plateau.getNbMenaces(PlateauFousFous.JNOIR));
+				return (16 - plateau.getNbNoir() - (16 - plateau.getNbBlanc())) * 10 + (plateau.getNbMenaces(PlateauFousFous.JNOIR) - plateau.getNbMenaces(PlateauFousFous.JBLANC));
 				//return (plateau.getNbBlanc() - plateau.getNbNoir()) + (plateau.getNbMenaces(PlateauFousFous.JBLANC) - plateau.getNbMenaces(PlateauFousFous.JNOIR));
 			} else {
 				//return 16 - plateau.getNbBlanc();// + plateau.getNbMenaces(PlateauFousFous.JNOIR);
-				return (16 - plateau.getNbBlanc() - (16 - plateau.getNbNoir())) * 10 + (plateau.getNbMenaces(PlateauFousFous.JNOIR) - plateau.getNbMenaces(PlateauFousFous.JBLANC));
+				return (16 - plateau.getNbBlanc() - (16 - plateau.getNbNoir())) * 10 + (plateau.getNbMenaces(PlateauFousFous.JBLANC) - plateau.getNbMenaces(PlateauFousFous.JNOIR));
 				//return (plateau.getNbNoir() - plateau.getNbBlanc()) + (plateau.getNbMenaces(PlateauFousFous.JNOIR) - plateau.getNbMenaces(PlateauFousFous.JBLANC));
 			}
 		}

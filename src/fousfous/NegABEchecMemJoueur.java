@@ -8,7 +8,7 @@ public class NegABEchecMemJoueur implements IJoueur {
 	
 	protected int profMax = 6;
 	
-	private HashMap<PlateauFousFous, InfosPlateau> transpoTable = new HashMap<PlateauFousFous, InfosPlateau>();
+	private HashMap<String, InfosPlateau> transpoTable = new HashMap<String, InfosPlateau>();
 	
 	private int mColor;
 	private String joueurMax;
@@ -96,7 +96,7 @@ public class NegABEchecMemJoueur implements IJoueur {
 		ArrayList<String> coupsPossibleList = new ArrayList<String>(Arrays.asList(partie.mouvementsPossibles(joueur)));
 		
 		InfosPlateau entreeT = null;
-		if(this.transpoTable.containsKey(partie) && coupsPossibleList.contains(this.transpoTable.get(partie).getMeilleurCoup())){
+		if(this.transpoTable.containsKey(partie.toStringLite()) && coupsPossibleList.contains(this.transpoTable.get(partie.toStringLite()).getMeilleurCoup())){
 			entreeT = this.transpoTable.get(partie);
 		}
 		
@@ -142,7 +142,7 @@ public class NegABEchecMemJoueur implements IJoueur {
 	    			break;
 	    		}
 			}
-			meilleurCoup = meilleurCoup.isEmpty() ? coupsPossibleList.get(0) : meilleurCoup; // pour eviter de creer des infosPlateau avec meilleur coup null
+			//meilleurCoup = meilleurCoup.isEmpty() ? coupsPossibleList.get(0) : meilleurCoup; // pour eviter de creer des infosPlateau avec meilleur coup null
 		}
 		
 		if(entreeT == null){
@@ -158,7 +158,7 @@ public class NegABEchecMemJoueur implements IJoueur {
 			entreeT.setFlag(InfosPlateau.Flag.EXACTVAL);
 		}
 		entreeT.setProf(prof);
-		this.transpoTable.put(partie, entreeT); //besoin de remplacer l'ancienne valeur de entreeT si celle-ci pas null ? (ou bien elle est écrasée automatiquement ?)
+		this.transpoTable.put(partie.toStringLite(), entreeT); //besoin de remplacer l'ancienne valeur de entreeT si celle-ci pas null ? (ou bien elle est écrasée automatiquement ?)
 		
 		return max;
 	}

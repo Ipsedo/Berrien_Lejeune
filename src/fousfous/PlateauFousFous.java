@@ -29,7 +29,7 @@ public class PlateauFousFous implements Partie1 {
 	private int[][] plateau;
 	
 	public enum PhaseJeu {
-		DEBUT, MILIEU, FIN;
+		DEBUT, PREMILIEU, POSTMILIEU, FIN;
 	}
 	
 	/**
@@ -577,9 +577,9 @@ public class PlateauFousFous implements Partie1 {
 		if(this.getNbBlanc() > 11 && this.getNbNoir() > 11){
 			return PhaseJeu.DEBUT;
 		}else if(this.getNbBlanc() > 8 || this.getNbNoir() > 8){
-			return PhaseJeu.MILIEU;
+			return PhaseJeu.PREMILIEU;
 		}else if((this.getNbBlanc() <= 8 && this.getNbBlanc() >= 5) || (this.getNbNoir() <= 8 && this.getNbNoir() >= 5)){
-			return PhaseJeu.MILIEU;
+			return PhaseJeu.POSTMILIEU;
 		}else{
 			return PhaseJeu.FIN;
 		}

@@ -1,20 +1,25 @@
 package fousfous;
 
 public class NegABPhaseJoueur extends NegABJoueur {
+	
+	public void initJoueur(int mycolour){
+		super.initJoueur(mycolour);
+		super.h = HeuristiqueFousFous.ffH4;
+	}
 
 	public String choixMouvement() {
 		// TODO Auto-generated method stub
 		switch(super.mPartie.getGamePhase()){
 			case DEBUT:
-				super.h = HeuristiqueFousFous.ffH1prime;
-				this.profMax = 6;
+				this.profMax = 5;
 				break;
-			case MILIEU:
-				super.h = HeuristiqueFousFous.ffH1prime;
+			case PREMILIEU:
 				this.profMax = 7;
 				break;
+			case POSTMILIEU:
+				this.profMax = 8;
+				break;
 			case FIN:
-				super.h = HeuristiqueFousFous.ffH1prime;
 				this.profMax = 10;
 				break;
 		}

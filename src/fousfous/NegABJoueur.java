@@ -54,11 +54,6 @@ public class NegABJoueur implements IJoueur {
 		
 		ArrayList<String> coupsPossibles = new ArrayList<String>(Arrays.asList(this.mPartie.mouvementsPossibles(this.joueurMax)));
 		
-		for(String s : coupsPossibles){
-			System.out.print(s + " ");
-		}
-		System.out.print("\n");
-		
 		if(coupsPossibles.isEmpty()){
 			return "xxxxx";
 		}
