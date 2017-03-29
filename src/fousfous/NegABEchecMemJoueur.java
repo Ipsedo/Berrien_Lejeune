@@ -15,10 +15,9 @@ public class NegABEchecMemJoueur implements IJoueur {
 	private String joueurMin;
 	protected PlateauFousFous mPartie = new PlateauFousFous();
 	
-	protected Heuristique h = HeuristiqueFousFous.ffH1prime;
+	protected Heuristique h = HeuristiqueFousFous.ffH1;
 
 	public void initJoueur(int mycolour) {
-		// TODO Auto-generated method stub
 		this.mColor = mycolour;
 		if(this.mColor == -1){
 			this.joueurMax = PlateauFousFous.JBLANC;
@@ -30,7 +29,6 @@ public class NegABEchecMemJoueur implements IJoueur {
 	}
 
 	public int getNumJoueur() {
-		// TODO Auto-generated method stub
 		return this.mColor;
 	}
 
@@ -49,8 +47,8 @@ public class NegABEchecMemJoueur implements IJoueur {
 		
 		/*int alpha = Integer.MIN_VALUE + 1;
 		int beta = Integer.MAX_VALUE - 1;*/
-		int alpha = -50;
-		int beta = 50;
+		int alpha = 1;
+		int beta = 4;
 		
 	    PlateauFousFous tmpP = this.mPartie.copy();
 	    
@@ -77,12 +75,12 @@ public class NegABEchecMemJoueur implements IJoueur {
 		this.mPartie.play(meilleurCoup, this.joueurMax);
 		System.out.println("A joué : " + meilleurCoup);
 		System.out.println(this.mPartie);
+		this.transpoTable.clear();
 		return meilleurCoup;
 		
 	}
 
 	public void declareLeVainqueur(int colour) {
-		// TODO Auto-generated method stub
 		if(colour == this.mColor){
 			System.out.println("Hasta la vista, baby");
 		}
@@ -122,6 +120,7 @@ public class NegABEchecMemJoueur implements IJoueur {
 			return parité * h.computeHeuristique(this.joueurMax, partie); // return ou max <- heuristique ?
 		} else {
 			max = Integer.MIN_VALUE + 1;
+			
 			if(entreeT != null){
 				meilleurCoup = entreeT.getMeilleurCoup();
 				int i = coupsPossibleList.indexOf(meilleurCoup);
@@ -129,10 +128,8 @@ public class NegABEchecMemJoueur implements IJoueur {
 				coupsPossibleList.add(i, tmpCoup);
 				coupsPossibleList.add(0, meilleurCoup);
 			}
-			String[] coupsPossible = coupsPossibleList.toArray(new String[coupsPossibleList.size()]);
-			//forall coupPossible et pas pigé :  s = succ(n, c) + meilleurCoup en 1er
 			
-			/** Faire le meilleur coup en 1er **/
+			String[] coupsPossible = coupsPossibleList.toArray(new String[coupsPossibleList.size()]);
 			for(String c : coupsPossible){
 	    		PlateauFousFous tmp = partie.copy();
 	    		tmp.play(c, joueur);
@@ -142,13 +139,10 @@ public class NegABEchecMemJoueur implements IJoueur {
 	    			meilleurCoup = c;
 	    		}
 	    		if(alpha >= beta){
-	    			meilleurCoup = c;
 	    			break;
 	    		}
 			}
-			//System.out.println("meilleur coup avant " + meilleurCoup);
 			meilleurCoup = meilleurCoup.isEmpty() ? coupsPossibleList.get(0) : meilleurCoup; // pour eviter de creer des infosPlateau avec meilleur coup null
-			//System.out.println("meilleur coup après " + meilleurCoup);
 		}
 		
 		if(entreeT == null){
@@ -170,12 +164,10 @@ public class NegABEchecMemJoueur implements IJoueur {
 	}
 
 	public void mouvementEnnemi(String coup) {
-		// TODO Auto-generated method stub
 		this.mPartie.play(coup, this.joueurMin);
 	}
 
 	public String binoName() {
-		// TODO Auto-generated method stub
 		return "NegABEchecMem";
 	}
 
