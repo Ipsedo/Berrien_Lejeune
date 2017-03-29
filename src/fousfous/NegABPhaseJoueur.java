@@ -9,7 +9,7 @@ public class NegABPhaseJoueur extends NegABJoueur {
 
 	public String choixMouvement() {
 		// TODO Auto-generated method stub
-		switch(super.mPartie.getGamePhase()){
+		/*switch(super.mPartie.getGamePhase()){
 			case DEBUT:
 				this.profMax = 5;
 				break;
@@ -22,7 +22,7 @@ public class NegABPhaseJoueur extends NegABJoueur {
 			case FIN:
 				this.profMax = 10;
 				break;
-		}
+		}*/
 		
 		return super.choixMouvement();
 	}
