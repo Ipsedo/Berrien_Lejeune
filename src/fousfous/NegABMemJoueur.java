@@ -13,7 +13,7 @@ public class NegABMemJoueur implements IJoueur {
 	private String joueurMin;
 	protected PlateauFousFous mPartie = new PlateauFousFous();
 	
-	protected Heuristique h = HeuristiqueFousFous.ffH1;
+	protected Heuristique h = HeuristiqueFousFous.ffH4;
 	
 	private HashMap<Integer, InfosPlateau> transpoTable = new HashMap<Integer, InfosPlateau>();
 
@@ -39,15 +39,24 @@ public class NegABMemJoueur implements IJoueur {
 		
 		String meilleurCoup = "";
 		String joueur = parité > 0 ? this.joueurMax : this.joueurMin;
-		ArrayList<String> coupsPossibleList = new ArrayList<String>(Arrays.asList(partie.mouvementsPossibles(joueur)));
+		String[] coupsPossibles = partie.mouvementsPossibles(joueur);
 		
 		InfosPlateau entreeT = this.transpoTable.get(partie.hashCode());
-		if(entreeT != null && !coupsPossibleList.contains(this.transpoTable.get(partie.hashCode()).getMeilleurCoup())){
+		
+		boolean contains = false;
+		int indMeilCoup = -1;
+		for(int i = 0; entreeT != null && i < coupsPossibles.length; i++){
+			if(coupsPossibles[i].equals(entreeT.getMeilleurCoup())){
+				contains = true;
+				indMeilCoup = i;
+				meilleurCoup = coupsPossibles[i];
+			}
+		}
+		if(entreeT != null && !contains){
 			entreeT = null;
 		}
 		
 		if(entreeT != null && entreeT.getProf() >= prof){
-			//System.out.println("Avant switch, entreeT, val : " + entreeT.getVal() + ", prof : " + entreeT.getProf() + ", meilleurCoup : " + entreeT.getMeilleurCoup() + " flag : " + entreeT.getFlag());
 			switch(entreeT.getFlag()){
 				case BINF:
 					alpha = Math.max(alpha, entreeT.getVal());
@@ -69,23 +78,18 @@ public class NegABMemJoueur implements IJoueur {
 			return parité * this.h.computeHeuristique(this.joueurMax, partie);
 		}else{
 			if(entreeT != null){
-				meilleurCoup = entreeT.getMeilleurCoup();
-				int i = coupsPossibleList.indexOf(meilleurCoup);
-				String tmpCoup = coupsPossibleList.get(0);
-				coupsPossibleList.add(i, tmpCoup);
-				coupsPossibleList.add(0, meilleurCoup);
-			}
-			
-			String[] coupsPossible = coupsPossibleList.toArray(new String[coupsPossibleList.size()]);
-			
-			for(String c : coupsPossible){
+				String tmpC = coupsPossibles[0];
+				coupsPossibles[0] = meilleurCoup;
+				coupsPossibles[indMeilCoup] = tmpC;
+			}			
+			for(int i = 0; i < coupsPossibles.length; i++){
 	    		PlateauFousFous tmp = partie.copy();
-	    		tmp.play(c, joueur);
+	    		tmp.play(coupsPossibles[i], joueur);
 	    		int tmpA = -negAB(prof - 1, tmp, -beta, -alpha, -parité);
 	    		if(tmpA > alpha){
 	    			alpha = tmpA;
 	    			res = alpha;
-	    			meilleurCoup = c;
+	    			meilleurCoup = coupsPossibles[i];
 	    		}
 	    		if(alpha >= beta){
 	    			res = beta;
@@ -114,6 +118,7 @@ public class NegABMemJoueur implements IJoueur {
 	public String choixMouvement() {
 		// TODO Auto-generated method stub
 		System.out.println("NegAB, profondeur max : " + this.profMax);
+		long t1 = System.currentTimeMillis();
 		
 		ArrayList<String> coupsPossibles = new ArrayList<String>(Arrays.asList(this.mPartie.mouvementsPossibles(this.joueurMax)));
 		
@@ -142,7 +147,7 @@ public class NegABMemJoueur implements IJoueur {
 			}
 		}
 		this.mPartie.play(meilleurCoup, this.joueurMax);
-		System.out.println("A joué : " + meilleurCoup);
+		System.out.println("A joué : " + meilleurCoup + " en " + (System.currentTimeMillis() - t1));
 		System.out.println(this.mPartie);
 		return meilleurCoup;
 	}

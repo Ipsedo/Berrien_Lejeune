@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class NegABJoueur implements IJoueur {
 	
-	protected int profMax = 4;
+	protected int profMax = 6;
 	
 	private int mColor;
 	private String joueurMax;
@@ -51,6 +51,7 @@ public class NegABJoueur implements IJoueur {
 	public String choixMouvement() {
 		// TODO Auto-generated method stub
 		System.out.println("NegAB, profondeur max : " + this.profMax);
+		long t1 = System.currentTimeMillis();
 		
 		ArrayList<String> coupsPossibles = new ArrayList<String>(Arrays.asList(this.mPartie.mouvementsPossibles(this.joueurMax)));
 		
@@ -79,7 +80,7 @@ public class NegABJoueur implements IJoueur {
 			}
 		}
 		this.mPartie.play(meilleurCoup, this.joueurMax);
-		System.out.println("A joué : " + meilleurCoup);
+		System.out.println("A joué : " + meilleurCoup + " en " + (System.currentTimeMillis() - t1));
 		System.out.println(this.mPartie);
 		return meilleurCoup;
 	}
