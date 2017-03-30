@@ -578,7 +578,7 @@ public class PlateauFousFous implements Partie1 {
 			return PhaseJeu.DEBUT;
 		}else if(this.getNbBlanc() > 8 || this.getNbNoir() > 8){
 			return PhaseJeu.PREMILIEU;
-		}else if((this.getNbBlanc() <= 8 && this.getNbBlanc() >= 5) || (this.getNbNoir() <= 8 && this.getNbNoir() >= 5)){
+		}else if((this.getNbBlanc() <= 8 && this.getNbBlanc() >= 5) && (this.getNbNoir() <= 8 && this.getNbNoir() >= 5)){
 			return PhaseJeu.POSTMILIEU;
 		}else{
 			return PhaseJeu.FIN;

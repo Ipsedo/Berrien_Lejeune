@@ -11,16 +11,16 @@ public class NegABPhaseJoueur extends NegABJoueur {
 		// TODO Auto-generated method stub
 		switch(super.mPartie.getGamePhase()){
 			case DEBUT:
-				this.profMax = 5;
+				this.profMax = 6;
 				break;
 			case PREMILIEU:
 				this.profMax = 7;
 				break;
 			case POSTMILIEU:
-				this.profMax = 8;
+				this.profMax = 9;
 				break;
 			case FIN:
-				this.profMax = 10;
+				this.profMax = 15;
 				break;
 		}
 		

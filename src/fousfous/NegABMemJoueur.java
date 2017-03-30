@@ -13,7 +13,7 @@ public class NegABMemJoueur implements IJoueur {
 	private String joueurMin;
 	protected PlateauFousFous mPartie = new PlateauFousFous();
 	
-	protected Heuristique h = HeuristiqueFousFous.ffH4;
+	protected Heuristique h = HeuristiqueFousFous.ffH1;
 	
 	private HashMap<Integer, InfosPlateau> transpoTable = new HashMap<Integer, InfosPlateau>();
 
@@ -34,9 +34,7 @@ public class NegABMemJoueur implements IJoueur {
 		return this.mColor;
 	}
 
-	private int negAB(int prof, PlateauFousFous partie, int alpha, int beta, int parité){		
-		int alphaInit = alpha;
-		
+	private int negAB(int prof, PlateauFousFous partie, int alpha, int beta, int parité){				
 		String meilleurCoup = "";
 		String joueur = parité > 0 ? this.joueurMax : this.joueurMin;
 		String[] coupsPossibles = partie.mouvementsPossibles(joueur);
@@ -57,16 +55,7 @@ public class NegABMemJoueur implements IJoueur {
 		}
 		
 		if(entreeT != null && entreeT.getProf() >= prof){
-			switch(entreeT.getFlag()){
-				case BINF:
-					alpha = Math.max(alpha, entreeT.getVal());
-					break;
-				case BSUP:
-					beta = Math.min(beta, entreeT.getVal());
-					break;
-				case EXACTVAL:
-					return entreeT.getVal();			
-			}
+			alpha = Math.max(entreeT.getVal(), alpha);
 			if(alpha >= beta){
 				return entreeT.getVal();
 			}
@@ -103,13 +92,13 @@ public class NegABMemJoueur implements IJoueur {
 		}
 		entreeT.setVal(res);
 		entreeT.setMeilleurCoup(meilleurCoup);
-		if(res <= alphaInit){
+		/*if(res <= alphaInit){
 			entreeT.setFlag(InfosPlateau.Flag.BSUP);
 		} else if(res >= beta){
 			entreeT.setFlag(InfosPlateau.Flag.BINF);
 		} else {
 			entreeT.setFlag(InfosPlateau.Flag.EXACTVAL);
-		}
+		}*/
 		entreeT.setProf(prof);
 		this.transpoTable.put(partie.hashCode(), entreeT);
 		return res;
@@ -117,7 +106,7 @@ public class NegABMemJoueur implements IJoueur {
 
 	public String choixMouvement() {
 		// TODO Auto-generated method stub
-		System.out.println("NegAB, profondeur max : " + this.profMax);
+		System.out.println("NegABMem, profondeur max : " + this.profMax);
 		long t1 = System.currentTimeMillis();
 		
 		ArrayList<String> coupsPossibles = new ArrayList<String>(Arrays.asList(this.mPartie.mouvementsPossibles(this.joueurMax)));
