@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class NegABJoueur implements IJoueur {
 	
-	protected int profMax = 6;
+	protected int profMax = 7;
 	
 	private int mColor;
 	private String joueurMax;

@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class NegABMemJoueur implements IJoueur {
 
-	protected int profMax = 6;
+	protected int profMax = 7;
 	
 	private int mColor;
 	private String joueurMax;
@@ -55,9 +55,13 @@ public class NegABMemJoueur implements IJoueur {
 		}
 		
 		if(entreeT != null && entreeT.getProf() >= prof){
-			alpha = Math.max(entreeT.getVal(), alpha);
-			if(alpha >= beta){
+			int tmpA = Math.max(entreeT.getVal(), alpha);
+			//alpha = Math.max(entreeT.getVal(), alpha);
+			if(tmpA >= beta){
 				return entreeT.getVal();
+			}
+			if(tmpA > alpha){
+				return tmpA;
 			}
 		}
 		
