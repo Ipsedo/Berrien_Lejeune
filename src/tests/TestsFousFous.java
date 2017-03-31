@@ -8,6 +8,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.Test;
@@ -262,6 +263,12 @@ public class TestsFousFous {
 		p1.setFromFile("plateau.txt");
 		p2.setFromFile("plateauTest11");
 		assertThat(p1.hashCode(), not(p2.hashCode()));
+		
+		p1.setFromFile("plateauTest12");
+		HashSet<Integer> hs = new HashSet<Integer>();
+		hs.add(p1.hashCode());
+		p2.setFromFile("plateauTest12");
+		assertTrue(hs.contains(p2.hashCode()));
 	}
 
 }

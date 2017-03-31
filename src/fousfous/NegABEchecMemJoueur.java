@@ -4,32 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class NegABEchecMemJoueur implements IJoueur {
-	
-	protected int profMax = 6;
+public class NegABEchecMemJoueur extends Joueur {
 	
 	private HashMap<Integer, InfosPlateau> transpoTable = new HashMap<Integer, InfosPlateau>();
 	
-	private int mColor;
-	private String joueurMax;
-	private String joueurMin;
-	protected PlateauFousFous mPartie = new PlateauFousFous();
-	
-	protected Heuristique h = HeuristiqueFousFous.ffH1;
 
 	public void initJoueur(int mycolour) {
-		this.mColor = mycolour;
-		if(this.mColor == -1){
-			this.joueurMax = PlateauFousFous.JBLANC;
-			this.joueurMin = PlateauFousFous.JNOIR;
-		} else {
-			this.joueurMin = PlateauFousFous.JBLANC;
-			this.joueurMax = PlateauFousFous.JNOIR;
-		}
-	}
-
-	public int getNumJoueur() {
-		return this.mColor;
+		super.initJoueur(mycolour);
+		this.profMax = 6;
+		this.h = HeuristiqueFousFous.ffH4;
 	}
 
 	public String choixMouvement() {
@@ -37,7 +20,7 @@ public class NegABEchecMemJoueur implements IJoueur {
 		
 		/** pas du tout sûr piur cette method -> à verifier */
 		
-		System.out.println("NegABEchecMem, profondeur max : " + this.profMax);
+		System.out.println(this.binoName() + ", profondeur max : " + this.profMax);
 		
 		ArrayList<String> coupsPossibles = new ArrayList<String>(Arrays.asList(this.mPartie.mouvementsPossibles(this.joueurMax)));
 		
@@ -84,12 +67,6 @@ public class NegABEchecMemJoueur implements IJoueur {
 		//this.transpoTable.clear();
 		return meilleurCoup;
 		
-	}
-
-	public void declareLeVainqueur(int colour) {
-		if(colour == this.mColor){
-			System.out.println("Hasta la vista, baby");
-		}
 	}
 	
 	private int negABEchecMem(int prof, PlateauFousFous partie, int alpha, int beta, int parité){
@@ -168,10 +145,6 @@ public class NegABEchecMemJoueur implements IJoueur {
 		this.transpoTable.put(partie.hashCode(), entreeT); //besoin de remplacer l'ancienne valeur de entreeT si celle-ci pas null ? (ou bien elle est écrasée automatiquement ?)
 		
 		return max;
-	}
-
-	public void mouvementEnnemi(String coup) {
-		this.mPartie.play(coup, this.joueurMin);
 	}
 
 	public String binoName() {

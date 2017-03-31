@@ -4,113 +4,92 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class NegABMemJoueur implements IJoueur {
+public class NegABMemJoueur extends Joueur {
 
-	protected int profMax = 7;
-	
-	private int mColor;
-	private String joueurMax;
-	private String joueurMin;
-	protected PlateauFousFous mPartie = new PlateauFousFous();
-	
-	protected Heuristique h = HeuristiqueFousFous.ffH1;
 	
 	private HashMap<Integer, InfosPlateau> transpoTable = new HashMap<Integer, InfosPlateau>();
 
 	public void initJoueur(int mycolour) {
 		// TODO Auto-generated method stub
-		this.mColor = mycolour;
-		if(this.mColor == -1){
-			this.joueurMax = PlateauFousFous.JBLANC;
-			this.joueurMin = PlateauFousFous.JNOIR;
-		} else {
-			this.joueurMin = PlateauFousFous.JBLANC;
-			this.joueurMax = PlateauFousFous.JNOIR;
-		}
+		super.initJoueur(mycolour);
+		this.profMax = 6;
 	}
 
-	public int getNumJoueur() {
-		// TODO Auto-generated method stub
-		return this.mColor;
-	}
-
+	/**
+	 * Ptite opti : on calcul plus mouvementsPossibles sur les feuilles (que pour nodes mtn)
+	 * @param prof
+	 * @param partie
+	 * @param alpha
+	 * @param beta
+	 * @param parité
+	 * @return
+	 */
 	private int negAB(int prof, PlateauFousFous partie, int alpha, int beta, int parité){				
-		String meilleurCoup = "";
-		String joueur = parité > 0 ? this.joueurMax : this.joueurMin;
-		String[] coupsPossibles = partie.mouvementsPossibles(joueur);
-		
-		InfosPlateau entreeT = this.transpoTable.get(partie.hashCode());
-		
-		boolean contains = false;
-		int indMeilCoup = -1;
-		for(int i = 0; entreeT != null && i < coupsPossibles.length; i++){
-			if(coupsPossibles[i].equals(entreeT.getMeilleurCoup())){
-				contains = true;
-				indMeilCoup = i;
-				meilleurCoup = coupsPossibles[i];
-			}
-		}
-		if(entreeT != null && !contains){
-			entreeT = null;
-		}
-		
-		if(entreeT != null && entreeT.getProf() >= prof){
-			int tmpA = Math.max(entreeT.getVal(), alpha);
-			//alpha = Math.max(entreeT.getVal(), alpha);
-			if(tmpA >= beta){
-				return entreeT.getVal();
-			}
-			if(tmpA > alpha){
-				return tmpA;
-			}
-		}
-		
-		int res = alpha;
-		
 		if(prof <= 0 || partie.finDePartie()){
 			return parité * this.h.computeHeuristique(this.joueurMax, partie);
 		}else{
+			String meilleurCoup = "";
+			String joueur = parité > 0 ? this.joueurMax : this.joueurMin;
+			String[] coupsPossibles = partie.mouvementsPossibles(joueur);
+			
+			InfosPlateau entreeT = this.transpoTable.get(partie.hashCode());
+			
+			boolean contains = false;
+			int indMeilCoup = -1;
+			for(int i = 0; entreeT != null && i < coupsPossibles.length; i++){
+				if(coupsPossibles[i].equals(entreeT.getMeilleurCoup())){
+					contains = true;
+					indMeilCoup = i;
+					meilleurCoup = coupsPossibles[i];
+					break;
+				}
+			}
+			if(entreeT != null && !contains){
+				entreeT = null;
+			}
+			
+			if(entreeT != null && entreeT.getProf() >= prof){
+				alpha = Math.max(alpha, entreeT.getVal());
+				//return entreeT.getVal();						//Return entreeT.getVal() ou alpha <- max(alpha, entreeT.getVal()) ?
+			}
+			
+			int res = alpha;
 			if(entreeT != null){
 				String tmpC = coupsPossibles[0];
 				coupsPossibles[0] = meilleurCoup;
 				coupsPossibles[indMeilCoup] = tmpC;
-			}			
-			for(int i = 0; i < coupsPossibles.length; i++){
+			}
+			
+			for(String c : coupsPossibles){
 	    		PlateauFousFous tmp = partie.copy();
-	    		tmp.play(coupsPossibles[i], joueur);
+	    		tmp.play(c, joueur);
 	    		int tmpA = -negAB(prof - 1, tmp, -beta, -alpha, -parité);
 	    		if(tmpA > alpha){
 	    			alpha = tmpA;
 	    			res = alpha;
-	    			meilleurCoup = coupsPossibles[i];
+	    			meilleurCoup = c;
 	    		}
 	    		if(alpha >= beta){
 	    			res = beta;
 	    			break;
-	    			//return beta;
 	    		}
 			}
+			
+			if(entreeT == null){
+				entreeT = new InfosPlateau();
+			}
+			entreeT.setVal(res);
+			entreeT.setMeilleurCoup(meilleurCoup);
+			entreeT.setProf(prof);
+			this.transpoTable.put(partie.hashCode(), entreeT);
+			return res;
 		}
-		if(entreeT == null){
-			entreeT = new InfosPlateau(); // vu que si le get depuis la hashMap ne donne rien faut bien creer une instance
-		}
-		entreeT.setVal(res);
-		entreeT.setMeilleurCoup(meilleurCoup);
-		/*if(res <= alphaInit){
-			entreeT.setFlag(InfosPlateau.Flag.BSUP);
-		} else if(res >= beta){
-			entreeT.setFlag(InfosPlateau.Flag.BINF);
-		} else {
-			entreeT.setFlag(InfosPlateau.Flag.EXACTVAL);
-		}*/
-		entreeT.setProf(prof);
-		this.transpoTable.put(partie.hashCode(), entreeT);
-		return res;
+		
 	}
 
 	public String choixMouvement() {
 		// TODO Auto-generated method stub
-		System.out.println("NegABMem, profondeur max : " + this.profMax);
+		System.out.println(this.binoName() + ", profondeur max : " + this.profMax);
 		long t1 = System.currentTimeMillis();
 		
 		ArrayList<String> coupsPossibles = new ArrayList<String>(Arrays.asList(this.mPartie.mouvementsPossibles(this.joueurMax)));
@@ -142,22 +121,10 @@ public class NegABMemJoueur implements IJoueur {
 		this.mPartie.play(meilleurCoup, this.joueurMax);
 		System.out.println("A joué : " + meilleurCoup + " en " + (System.currentTimeMillis() - t1));
 		System.out.println(this.mPartie);
+		//this.transpoTable.clear();
 		return meilleurCoup;
 	}
 
-	public void declareLeVainqueur(int colour) {
-		// TODO Auto-generated method stub
-		if(colour == this.mColor){
-			System.out.println("Hasta la vista, baby");
-		}
-
-	}
-
-	public void mouvementEnnemi(String coup) {
-		// TODO Auto-generated method stub
-		this.mPartie.play(coup, this.joueurMin);
-
-	}
 
 	public String binoName() {
 		// TODO Auto-generated method stub

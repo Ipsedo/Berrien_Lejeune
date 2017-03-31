@@ -3,32 +3,13 @@ package fousfous;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class NegABJoueur implements IJoueur {
+public class NegABJoueur extends Joueur {
 	
-	protected int profMax = 7;
-	
-	private int mColor;
-	private String joueurMax;
-	private String joueurMin;
-	protected PlateauFousFous mPartie = new PlateauFousFous();
-	
-	protected Heuristique h = HeuristiqueFousFous.ffH1;
+
 
 	public void initJoueur(int mycolour) {
 		// TODO Auto-generated method stub
-		this.mColor = mycolour;
-		if(this.mColor == -1){
-			this.joueurMax = PlateauFousFous.JBLANC;
-			this.joueurMin = PlateauFousFous.JNOIR;
-		} else {
-			this.joueurMin = PlateauFousFous.JBLANC;
-			this.joueurMax = PlateauFousFous.JNOIR;
-		}
-	}
-
-	public int getNumJoueur() {
-		// TODO Auto-generated method stub
-		return this.mColor;
+		super.initJoueur(mycolour);
 	}
 	
 	private int negAB(int pronf, PlateauFousFous partie, int alpha, int beta, int parité){
@@ -50,7 +31,7 @@ public class NegABJoueur implements IJoueur {
 
 	public String choixMouvement() {
 		// TODO Auto-generated method stub
-		System.out.println("NegAB, profondeur max : " + this.profMax);
+		System.out.println(this.binoName() + ", profondeur max : " + this.profMax);
 		long t1 = System.currentTimeMillis();
 		
 		ArrayList<String> coupsPossibles = new ArrayList<String>(Arrays.asList(this.mPartie.mouvementsPossibles(this.joueurMax)));
@@ -85,22 +66,7 @@ public class NegABJoueur implements IJoueur {
 		return meilleurCoup;
 	}
 
-	public void declareLeVainqueur(int colour) {
-		// TODO Auto-generated method stub
-		if(colour == this.mColor){
-			System.out.println("Hasta la vista, baby");
-		}
-
-	}
-
-	public void mouvementEnnemi(String coup) {
-		// TODO Auto-generated method stub
-		this.mPartie.play(coup, this.joueurMin);
-
-	}
-
-	public String binoName() {
-		// TODO Auto-generated method stub
+	public String bioName(){
 		return "NegAB";
 	}
 }

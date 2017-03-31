@@ -8,32 +8,11 @@ import java.util.Arrays;
  * @author samuel
  *
  */
-public class NegABEchecJoueur implements IJoueur {
+public class NegABEchecJoueur extends Joueur {
 	
-	protected int profMax = 4;
-	
-	private int mColor;
-	private String joueurMax;
-	private String joueurMin;
-	protected PlateauFousFous mPartie = new PlateauFousFous();
-	
-	private Heuristique h = HeuristiqueFousFous.ffH1;
 
 	public void initJoueur(int mycolour) {
-		// TODO Auto-generated method stub
-		this.mColor = mycolour;
-		if(this.mColor == -1){
-			this.joueurMax = PlateauFousFous.JBLANC;
-			this.joueurMin = PlateauFousFous.JNOIR;
-		} else {
-			this.joueurMin = PlateauFousFous.JBLANC;
-			this.joueurMax = PlateauFousFous.JNOIR;
-		}
-	}
-
-	public int getNumJoueur() {
-		// TODO Auto-generated method stub
-		return this.mColor;
+		super.initJoueur(mycolour);
 	}
 	
 	private int negABEchec(int pronf, PlateauFousFous partie, int alpha, int beta, int parité){
@@ -94,18 +73,6 @@ public class NegABEchecJoueur implements IJoueur {
 		System.out.println("A joué : " + meilleurCoup);
 		System.out.println(this.mPartie);
 		return meilleurCoup;
-	}
-
-	public void declareLeVainqueur(int colour) {
-		// TODO Auto-generated method stub
-		if(colour == this.mColor){
-			System.out.println("Hasta la vista, baby");
-		}
-	}
-
-	public void mouvementEnnemi(String coup) {
-		// TODO Auto-generated method stub
-		this.mPartie.play(coup, this.joueurMin);
 	}
 
 	public String binoName() {
