@@ -1,4 +1,4 @@
-package fousfous;
+package fousfous.joueur;
 
 public class NegABEchecMemPhaseJoueur extends NegABEchecMemJoueur {
 	

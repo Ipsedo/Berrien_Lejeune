@@ -1,4 +1,6 @@
-package fousfous;
+package fousfous.joueur;
+
+import fousfous.HeuristiqueFousFous;
 
 public class NegABFF2Joueur extends NegABJoueur {
 

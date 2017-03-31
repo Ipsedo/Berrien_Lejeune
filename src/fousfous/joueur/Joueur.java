@@ -1,4 +1,9 @@
-package fousfous;
+package fousfous.joueur;
+
+import fousfous.Heuristique;
+import fousfous.HeuristiqueFousFous;
+import fousfous.IJoueur;
+import fousfous.PlateauFousFous;
 
 public abstract class Joueur implements IJoueur {
 

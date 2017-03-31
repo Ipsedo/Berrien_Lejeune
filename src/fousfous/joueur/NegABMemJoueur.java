@@ -1,11 +1,13 @@
-package fousfous;
+package fousfous.joueur;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class NegABMemJoueur extends Joueur {
+import fousfous.InfosPlateau;
+import fousfous.PlateauFousFous;
 
+public class NegABMemJoueur extends Joueur {
 	
 	private HashMap<Integer, InfosPlateau> transpoTable = new HashMap<Integer, InfosPlateau>();
 

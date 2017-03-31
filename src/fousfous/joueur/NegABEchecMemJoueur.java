@@ -1,8 +1,13 @@
-package fousfous;
+package fousfous.joueur;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+
+import fousfous.HeuristiqueFousFous;
+import fousfous.InfosPlateau;
+import fousfous.PlateauFousFous;
+import fousfous.InfosPlateau.Flag;
 
 public class NegABEchecMemJoueur extends Joueur {
 	
