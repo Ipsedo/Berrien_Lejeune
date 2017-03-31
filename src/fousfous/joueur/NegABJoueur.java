@@ -3,6 +3,7 @@ package fousfous.joueur;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import fousfous.HeuristiqueFousFous;
 import fousfous.PlateauFousFous;
 
 public class NegABJoueur extends Joueur {
@@ -12,6 +13,8 @@ public class NegABJoueur extends Joueur {
 	public void initJoueur(int mycolour) {
 		// TODO Auto-generated method stub
 		super.initJoueur(mycolour);
+		super.h = HeuristiqueFousFous.ffH4;
+		super.profMax = 7;
 	}
 	
 	private int negAB(int pronf, PlateauFousFous partie, int alpha, int beta, int parité){

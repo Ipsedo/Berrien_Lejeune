@@ -4,17 +4,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import fousfous.HeuristiqueFousFous;
 import fousfous.InfosPlateau;
 import fousfous.PlateauFousFous;
 
 public class NegABMemJoueur extends Joueur {
 	
-	private HashMap<Integer, InfosPlateau> transpoTable = new HashMap<Integer, InfosPlateau>();
+	protected HashMap<Integer, InfosPlateau> transpoTable = new HashMap<Integer, InfosPlateau>();
 
 	public void initJoueur(int mycolour) {
 		// TODO Auto-generated method stub
 		super.initJoueur(mycolour);
-		this.profMax = 6;
+		this.profMax = 7;
+		this.h = HeuristiqueFousFous.ffH4;
 	}
 
 	/**
