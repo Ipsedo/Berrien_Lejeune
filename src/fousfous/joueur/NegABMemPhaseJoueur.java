@@ -10,30 +10,32 @@ public class NegABMemPhaseJoueur extends NegABMemJoueur {
 	public void initJoueur(int mycolour) {
 		// TODO Auto-generated method stub
 		super.initJoueur(mycolour);
-		this.profMax = 6;
-		this.h = HeuristiqueFousFous.ffH4;
+		this.profMax = 8;
+		this.h = HeuristiqueFousFous.ffH1;
 		this.oldPhase = super.mPartie.getGamePhase();
 	}
 	
 	public String choixMouvement() {
-		if(this.oldPhase != super.mPartie.getGamePhase()){
+		/*if(this.oldPhase != super.mPartie.getGamePhase()){
 			switch(super.mPartie.getGamePhase()){
 			case DEBUT:
-				this.profMax = 6;
+				this.profMax = 8;
 				break;
 			case PREMILIEU:
 				this.profMax = 8;
 				break;
 			case POSTMILIEU:
 				this.profMax = 10;
+				super.transpoTable.clear();
 				break;
 			case FIN:
 				this.profMax = 16;
+				super.transpoTable.clear();
 				break;
 			}
+			System.out.println("changé");
 			this.oldPhase = super.mPartie.getGamePhase();
-			super.transpoTable.clear();
-		}
+		}*/
 		return super.choixMouvement();
 	}
 	
