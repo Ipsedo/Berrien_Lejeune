@@ -13,8 +13,8 @@ public class NegABJoueur extends Joueur {
 	public void initJoueur(int mycolour) {
 		// TODO Auto-generated method stub
 		super.initJoueur(mycolour);
-		super.h = HeuristiqueFousFous.ffH4;
-		super.profMax = 7;
+		super.h = HeuristiqueFousFous.ffH1;
+		super.profMax = 6;
 	}
 	
 	private int negAB(int pronf, PlateauFousFous partie, int alpha, int beta, int parité){
