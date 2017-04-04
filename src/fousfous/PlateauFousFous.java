@@ -482,7 +482,7 @@ public class PlateauFousFous implements Partie1 {
 	
 	public int getNbMenaces(String joueur){
 		int res = 0;
-		int mColor = joueur == PlateauFousFous.JBLANC ? 1 : -1;
+		int mColor = joueur == PlateauFousFous.JBLANC ? BLANC : NOIR;
 		int oColor = -mColor;
 		for(int i = 0; i < LIMIT; i++){
 			for(int j = 0; j < LIMIT; j++){
@@ -527,7 +527,7 @@ public class PlateauFousFous implements Partie1 {
 	
 	public int getNbDefense(String joueur){
 		int res = 0;
-		int mColor = joueur == PlateauFousFous.JBLANC ? 1 : -1;
+		int mColor = joueur == PlateauFousFous.JBLANC ? BLANC : NOIR;
 		for(int i = 0; i < LIMIT; i++){
 			for(int j = 0; j < LIMIT; j++){
 				if(this.plateau[i][j] == mColor){
