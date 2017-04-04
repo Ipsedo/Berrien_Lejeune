@@ -46,6 +46,8 @@ public abstract class Joueur implements IJoueur {
 	public void mouvementEnnemi(String coup) {
 		// TODO Auto-generated method stub
 		this.mPartie.play(coup, this.joueurMin);
+		System.out.println("Joueur " + this.joueurMin + " a joué " + coup);
+		System.out.println(this.mPartie);
 	}
 
 	public String binoName() {
