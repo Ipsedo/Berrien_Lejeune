@@ -75,9 +75,9 @@ public class HeuristiqueFousFous {
 		public int computeHeuristique(String joueur, Partie1 partie) {
 			PlateauFousFous plateau = (PlateauFousFous) partie;
 			if(joueur == PlateauFousFous.JBLANC){
-				return (plateau.getNbBlanc() - plateau.getNbNoir() * 2) + (plateau.getNbDefense(PlateauFousFous.JBLANC));// + (plateau.getNbMenaces(PlateauFousFous.JBLANC));
+				return (plateau.getNbBlanc() - plateau.getNbNoir() * 10) + (plateau.getNbDefense(PlateauFousFous.JBLANC));// + (plateau.getNbMenaces(PlateauFousFous.JBLANC));
 			} else {
-				return (plateau.getNbNoir() - plateau.getNbBlanc() * 2) + (plateau.getNbDefense(PlateauFousFous.JNOIR));// + (plateau.getNbMenaces(PlateauFousFous.JNOIR));
+				return (plateau.getNbNoir() - plateau.getNbBlanc() * 10) + (plateau.getNbDefense(PlateauFousFous.JNOIR));// + (plateau.getNbMenaces(PlateauFousFous.JNOIR));
 			}
 		}
 		
