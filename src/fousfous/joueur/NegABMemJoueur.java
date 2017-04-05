@@ -16,8 +16,8 @@ public class NegABMemJoueur extends Joueur {
 	public void initJoueur(int mycolour) {
 		// TODO Auto-generated method stub
 		super.initJoueur(mycolour);
-		this.profMax = 6;
-		this.h = HeuristiqueFousFous.ffH4;
+		this.profMax = 7;
+		this.h = HeuristiqueFousFous.ffH1;
 	}
 
 	/**
@@ -127,7 +127,9 @@ public class NegABMemJoueur extends Joueur {
 			}
 		}
 		this.mPartie.play(meilleurCoup, this.joueurMax);
-		System.out.println("A joué : " + meilleurCoup + " en " + (System.currentTimeMillis() - t1));
+		long tmpTime = (System.currentTimeMillis() - t1);
+		this.totalTime += tmpTime;
+		System.out.println("A joué : " + meilleurCoup + " en " + tmpTime + " / " + this.totalTime);
 		System.out.println(this.mPartie);
 		this.transpoTable.clear();
 		return meilleurCoup;

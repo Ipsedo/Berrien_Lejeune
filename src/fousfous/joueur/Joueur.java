@@ -19,6 +19,8 @@ public abstract class Joueur implements IJoueur {
 	
 	protected SimpleDateFormat sdf;
 	
+	protected long totalTime;
+	
 	public void initJoueur(int mycolour) {
 		// TODO Auto-generated method stub
 		this.mColor = mycolour;
@@ -32,6 +34,7 @@ public abstract class Joueur implements IJoueur {
 		this.h = HeuristiqueFousFous.ffH1;
 		this.profMax = 4;
 		this.sdf = new SimpleDateFormat("HH:mm:ss");
+		this.totalTime = 0L;
 	}
 
 	public int getNumJoueur() {

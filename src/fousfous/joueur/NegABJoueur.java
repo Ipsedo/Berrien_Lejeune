@@ -8,8 +8,6 @@ import fousfous.HeuristiqueFousFous;
 import fousfous.PlateauFousFous;
 
 public class NegABJoueur extends Joueur {
-	
-
 
 	public void initJoueur(int mycolour) {
 		// TODO Auto-generated method stub
@@ -67,7 +65,9 @@ public class NegABJoueur extends Joueur {
 			}
 		}
 		this.mPartie.play(meilleurCoup, this.joueurMax);
-		System.out.println("A joué : " + meilleurCoup + " en " + (System.currentTimeMillis() - t1));
+		long tmpTime = (System.currentTimeMillis() - t1);
+		this.totalTime += tmpTime;
+		System.out.println("A joué : " + meilleurCoup + " en " + tmpTime + " / " + this.totalTime);
 		System.out.println(this.mPartie);
 		return meilleurCoup;
 	}
