@@ -23,14 +23,12 @@ public class NegABMemPhaseJoueur extends NegABMemJoueur {
 				break;
 			case PREMILIEU:
 				this.profMax = 8;
-				super.transpoTable.clear();
 				break;
 			case POSTMILIEU:
 				this.profMax = 8;
 				break;
 			case FIN:
 				this.profMax = 10;
-				super.transpoTable.clear();
 				break;
 			}
 			System.out.println("changé");

@@ -128,7 +128,7 @@ public class NegABMemJoueur extends Joueur {
 		this.mPartie.play(meilleurCoup, this.joueurMax);
 		System.out.println("A joué : " + meilleurCoup + " en " + (System.currentTimeMillis() - t1));
 		System.out.println(this.mPartie);
-		//this.transpoTable.clear();
+		this.transpoTable.clear();
 		return meilleurCoup;
 	}
 
