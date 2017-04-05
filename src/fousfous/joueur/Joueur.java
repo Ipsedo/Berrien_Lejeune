@@ -1,5 +1,7 @@
 package fousfous.joueur;
 
+import java.text.SimpleDateFormat;
+
 import fousfous.Heuristique;
 import fousfous.HeuristiqueFousFous;
 import fousfous.IJoueur;
@@ -15,6 +17,8 @@ public abstract class Joueur implements IJoueur {
 	
 	protected Heuristique h;
 	
+	protected SimpleDateFormat sdf;
+	
 	public void initJoueur(int mycolour) {
 		// TODO Auto-generated method stub
 		this.mColor = mycolour;
@@ -27,6 +31,7 @@ public abstract class Joueur implements IJoueur {
 		}
 		this.h = HeuristiqueFousFous.ffH1;
 		this.profMax = 4;
+		this.sdf = new SimpleDateFormat("HH:mm:ss");
 	}
 
 	public int getNumJoueur() {

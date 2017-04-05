@@ -2,6 +2,7 @@ package fousfous.joueur;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 
 import fousfous.HeuristiqueFousFous;
@@ -25,7 +26,7 @@ public class NegABEchecMemJoueur extends Joueur {
 		
 		/** pas du tout sûr piur cette method -> à verifier */
 		
-		System.out.println(this.binoName() + ", profondeur max : " + this.profMax);
+		System.out.println(this.sdf.format(new Date()) + ", " + this.binoName() + ", profondeur max : " + this.profMax);
 		
 		ArrayList<String> coupsPossibles = new ArrayList<String>(Arrays.asList(this.mPartie.mouvementsPossibles(this.joueurMax)));
 		

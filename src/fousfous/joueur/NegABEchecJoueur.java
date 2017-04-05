@@ -2,6 +2,7 @@ package fousfous.joueur;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 import fousfous.PlateauFousFous;
 
@@ -38,7 +39,7 @@ public class NegABEchecJoueur extends Joueur {
 	}
 
 	public String choixMouvement() {
-		System.out.println(this.binoName() + ", profondeur max : " + this.profMax);
+		System.out.println(this.sdf.format(new Date()) + ", " + this.binoName() + ", profondeur max : " + this.profMax);
 		
 		ArrayList<String> coupsPossibles = new ArrayList<String>(Arrays.asList(this.mPartie.mouvementsPossibles(this.joueurMax)));
 		
