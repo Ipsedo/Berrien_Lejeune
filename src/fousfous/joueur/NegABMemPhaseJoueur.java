@@ -22,10 +22,10 @@ public class NegABMemPhaseJoueur extends NegABMemJoueur {
 				this.profMax = 6;
 				break;
 			case PREMILIEU:
-				this.profMax = 7;
+				this.profMax = 8;
 				break;
 			case POSTMILIEU:
-				this.profMax = 7;
+				this.profMax = 8;
 				break;
 			case FIN:
 				this.profMax = 10;

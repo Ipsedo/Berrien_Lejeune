@@ -16,12 +16,11 @@ public class NegABMemJoueur extends Joueur {
 	public void initJoueur(int mycolour) {
 		// TODO Auto-generated method stub
 		super.initJoueur(mycolour);
-		this.profMax = 7;
+		this.profMax = 6;
 		this.h = HeuristiqueFousFous.ffH1;
 	}
 
 	/**
-	 * Ptite opti : on calcul plus mouvementsPossibles sur les feuilles (que pour nodes mtn)
 	 * @param prof
 	 * @param partie
 	 * @param alpha
@@ -54,11 +53,7 @@ public class NegABMemJoueur extends Joueur {
 			}
 			
 			if(entreeT != null && entreeT.getProf() >= prof){
-				/*alpha = Math.max(alpha, entreeT.getVal());
-				if(alpha >= beta){
-	    			return beta;
-	    		}*/
-				return entreeT.getVal();						//Return entreeT.getVal() ou alpha <- max(alpha, entreeT.getVal()) ?
+				return entreeT.getVal();
 			}
 			
 			int res = alpha;
@@ -92,7 +87,6 @@ public class NegABMemJoueur extends Joueur {
 			this.transpoTable.put(partie.hashCode(), entreeT);
 			return res;
 		}
-		
 	}
 
 	public String choixMouvement() {

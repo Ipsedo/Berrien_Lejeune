@@ -90,7 +90,6 @@ public class NegABEchecMemJoueur extends Joueur {
 		}
 		
 		if(entreeT != null && entreeT.getProf() >= prof){
-			//System.out.println("Avant switch, entreeT, val : " + entreeT.getVal() + ", prof : " + entreeT.getProf() + ", meilleurCoup : " + entreeT.getMeilleurCoup() + " flag : " + entreeT.getFlag());
 			switch(entreeT.getFlag()){
 				case BINF:
 					alpha = Math.max(alpha, entreeT.getVal());
@@ -107,7 +106,7 @@ public class NegABEchecMemJoueur extends Joueur {
 		}
 		
 		if(prof == 0 || partie.finDePartie()){
-			return parité * h.computeHeuristique(this.joueurMax, partie); // return ou max <- heuristique ?
+			return parité * h.computeHeuristique(this.joueurMax, partie);
 		} else {
 			max = Integer.MIN_VALUE + 1;
 			
@@ -148,7 +147,7 @@ public class NegABEchecMemJoueur extends Joueur {
 			entreeT.setFlag(InfosPlateau.Flag.EXACTVAL);
 		}
 		entreeT.setProf(prof);
-		this.transpoTable.put(partie.hashCode(), entreeT); //besoin de remplacer l'ancienne valeur de entreeT si celle-ci pas null ? (ou bien elle est écrasée automatiquement ?)
+		this.transpoTable.put(partie.hashCode(), entreeT);
 		
 		return max;
 	}

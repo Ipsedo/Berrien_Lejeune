@@ -444,22 +444,10 @@ public class PlateauFousFous implements Partie1 {
 		return res;
 	}
 	
-	public String toStringLite(){
-		String res = "";
-		for(int i = 0; i < LIMIT; i ++){
-			for(int j = 0; j < LIMIT; j++){
-				if(this.plateau[i][j] == VIDE){
-					res += "-";
-				} else if(this.plateau[i][j] == BLANC){
-					res += "b";
-				} else if(this.plateau[i][j] == NOIR){
-					res += "n";
-				}
-			}
-		}
-		return res;
-	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getNbBlanc(){
 		int sum = 0;
 		for(int[] line : this.plateau){
@@ -470,6 +458,10 @@ public class PlateauFousFous implements Partie1 {
 		return sum;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getNbNoir(){
 		int sum = 0;
 		for(int[] line : this.plateau){
@@ -480,6 +472,11 @@ public class PlateauFousFous implements Partie1 {
 		return sum;
 	}
 	
+	/**
+	 * Retourne le nombre de menaces pour un joueur donné
+	 * @param joueur
+	 * @return
+	 */
 	public int getNbMenaces(String joueur){
 		int res = 0;
 		int mColor = joueur == PlateauFousFous.JBLANC ? BLANC : NOIR;
@@ -525,6 +522,11 @@ public class PlateauFousFous implements Partie1 {
 		return res;
 	}
 	
+	/**
+	 * Retourne les nombre de pions se défendant pour un joueur donné
+	 * @param joueur
+	 * @return
+	 */
 	public int getNbDefense(String joueur){
 		int res = 0;
 		int mColor = joueur == PlateauFousFous.JBLANC ? BLANC : NOIR;
@@ -569,10 +571,18 @@ public class PlateauFousFous implements Partie1 {
 		return res;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public PlateauFousFous copy(){
 		return new PlateauFousFous(this.plateau);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public PhaseJeu getGamePhase(){
 		if(this.getNbBlanc() > 11 && this.getNbNoir() > 11){
 			return PhaseJeu.DEBUT;
@@ -588,7 +598,6 @@ public class PlateauFousFous implements Partie1 {
 	@Override
 	public int hashCode(){
 		int[] res = new int[LIMIT * LIMIT];
-		//TODO trouver vraie fonction de hash ..
 		for(int i = 0; i < LIMIT; i++){
 			for(int j = 0; j < LIMIT; j++){
 				res[i * LIMIT + j] = this.plateau[i][j];
